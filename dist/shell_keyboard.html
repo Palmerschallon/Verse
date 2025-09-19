@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verse Shell Keyboard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050505;
+      --panel: #101015;
+      --drawer: #0a0a0d;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f3f4f8;
+      --text-muted: #9093a8;
+      --key-bg: #1c1c20;
+      --key-highlight: rgba(255, 255, 255, 0.14);
+      --key-shadow: rgba(0, 0, 0, 0.6);
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(160deg, rgba(15, 15, 20, 0.96), rgba(5, 5, 8, 0.96));
+    }
+
+    header.top-bar {
+      height: 64px;
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) auto minmax(160px, 1fr);
+      align-items: center;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 9, 12, 0.92);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: #f8f9ff;
+    }
+
+    .top-bar-actions {
+      justify-self: end;
+      display: flex;
+      gap: 12px;
+    }
+
+    .top-bar-actions button {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font: inherit;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .top-bar-actions button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .mode-toggle {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .mode-toggle .toggle-label {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .mode-toggle .toggle {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .mode-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font: inherit;
+      font-weight: 600;
+      padding: 6px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .mode-toggle button.active {
+      background: #121217;
+      color: var(--text);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .body-area {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+
+    aside.drawer {
+      width: 256px;
+      background: var(--drawer);
+      border-right: 1px solid var(--border);
+      padding: 32px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .drawer-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .drawer-tabs button {
+      border: none;
+      text-align: left;
+      font: inherit;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .drawer-tabs button.active,
+    .drawer-tabs button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .drawer-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    main.workspace {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      padding: 40px clamp(32px, 6vw, 72px) max(40px, env(safe-area-inset-bottom));
+      overflow: auto;
+    }
+
+    .workspace h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 0;
+      text-align: center;
+    }
+
+    .workspace p {
+      margin: 0;
+      color: var(--text-muted);
+      max-width: 520px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .strip {
+      width: min(640px, 100%);
+      background: rgba(20, 20, 28, 0.92);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42);
+      padding: 12px 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .strip .suggestion {
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .strip .suggestion.primary {
+      background: rgba(255, 255, 255, 0.12);
+      color: #101015;
+      font-weight: 600;
+    }
+
+    .keyboard-shell {
+      width: min(680px, 100%);
+      border-radius: 26px;
+      padding: 22px 18px;
+      background: linear-gradient(180deg, rgba(17, 17, 22, 0.95), rgba(7, 7, 12, 0.92));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.58);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .keyboard-row {
+      display: flex;
+      gap: 6px;
+      height: 48px;
+    }
+
+    .keyboard-row.bottom {
+      height: 56px;
+      align-items: center;
+      padding: 0 6px;
+    }
+
+    .keyboard-row.row-2::before,
+    .keyboard-row.row-2::after {
+      content: "";
+      flex: 0.5;
+    }
+
+    .keyboard-row.row-3::before,
+    .keyboard-row.row-3::after {
+      content: "";
+      flex: 0.35;
+    }
+
+    .key {
+      flex: 1;
+      position: relative;
+      border-radius: 9px;
+      background: var(--key-bg);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 4px 10px var(--key-shadow);
+      color: #f8f8fc;
+      font: inherit;
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .key span.secondary {
+      font-size: 12px;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
+
+    .key.special {
+      text-transform: none;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+
+    .key.shift,
+    .key.delete {
+      flex: 1.65;
+    }
+
+    .key.space {
+      flex: 4.2;
+      text-transform: none;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .key.symbol,
+    .key.return {
+      flex: 1.6;
+      text-transform: none;
+    }
+
+    .keyboard-row.row-3 .key,
+    .keyboard-row.bottom .key {
+      border-radius: 12px;
+    }
+
+    .key::after {
+      content: "";
+      position: absolute;
+      inset: 2px 2px 3px 2px;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    .key:hover {
+      background: #222227;
+    }
+
+    .key:active {
+      transform: translateY(1px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 1080px) {
+      header.top-bar {
+        grid-template-columns: minmax(120px, 1fr) auto minmax(120px, 1fr);
+        padding: 0 18px;
+      }
+
+      aside.drawer {
+        display: none;
+      }
+
+      main.workspace {
+        padding: 32px clamp(20px, 6vw, 48px) max(40px, env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .keyboard-shell {
+        padding: 18px 12px;
+        border-radius: 22px;
+      }
+
+      .key {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">Verse Shell</div>
+      <div class="mode-toggle" aria-label="Mode toggle">
+        <span class="toggle-label">Pro</span>
+        <div class="toggle" role="group" aria-label="Seed or Bloom">
+          <button class="active" type="button" aria-pressed="true">Seed</button>
+          <button type="button" aria-pressed="false">Bloom</button>
+        </div>
+        <span class="toggle-label">sess</span>
+      </div>
+      <div class="top-bar-actions">
+        <button type="button">Share</button>
+        <button type="button">Reset</button>
+      </div>
+    </header>
+    <div class="body-area">
+      <aside class="drawer" aria-label="Navigation">
+        <nav class="drawer-tabs" aria-label="Primary">
+          <button class="active" type="button">Seeds</button>
+          <button type="button">Remixing</button>
+          <button type="button">Feed</button>
+        </nav>
+        <div class="drawer-note">
+          Curate seeds, remix with Bloom, and replay renders deterministically. Drawer scaffolding stays open while the faux keyboard keeps the native one away.
+        </div>
+      </aside>
+      <main class="workspace">
+        <h1>Static Keyboard Shell</h1>
+        <p>The shell mirrors iOS keyboard geometry—ideal for wiring the Verse compiler without triggering the native keyboard. Mode switching is decorative for now.</p>
+        <div class="strip" aria-label="Suggested completions">
+          <div class="suggestion primary">ring tidal fade</div>
+          <div class="suggestion">ghost trails</div>
+          <div class="suggestion">slow tide</div>
+        </div>
+        <div class="keyboard-shell" role="presentation">
+          <div class="keyboard-row row-1" aria-hidden="true">
+            <div class="key">q</div>
+            <div class="key">w</div>
+            <div class="key">e</div>
+            <div class="key">r</div>
+            <div class="key">t</div>
+            <div class="key">y</div>
+            <div class="key">u</div>
+            <div class="key">i</div>
+            <div class="key">o</div>
+            <div class="key">p</div>
+          </div>
+          <div class="keyboard-row row-2" aria-hidden="true">
+            <div class="key">a</div>
+            <div class="key">s</div>
+            <div class="key">d</div>
+            <div class="key">f</div>
+            <div class="key">g</div>
+            <div class="key">h</div>
+            <div class="key">j</div>
+            <div class="key">k</div>
+            <div class="key">l</div>
+          </div>
+          <div class="keyboard-row row-3" aria-hidden="true">
+            <div class="key special shift">shift</div>
+            <div class="key">z</div>
+            <div class="key">x</div>
+            <div class="key">c</div>
+            <div class="key">v</div>
+            <div class="key">b</div>
+            <div class="key">n</div>
+            <div class="key">m</div>
+            <div class="key special delete">delete</div>
+          </div>
+          <div class="keyboard-row bottom" aria-hidden="true">
+            <div class="key special symbol">123</div>
+            <div class="key special symbol">◆</div>
+            <div class="key space">space</div>
+            <div class="key special return">return</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
