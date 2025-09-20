@@ -1,0 +1,141 @@
+[
+  { "trigger": "cell",               "triggerType": "word",    "effect": { "count": 1, "tremor": 0.08, "trails": 0.94 },              "domain": "biology", "tags": ["scale"] },
+  { "trigger": "single cell",        "triggerType": "phrase",  "effect": { "count": 1, "tremor": 0.06, "trails": 0.96 },              "domain": "biology", "tags": ["scale"] },
+  { "trigger": "tissue",             "triggerType": "word",    "effect": { "count": 400, "shape": "lattice", "tremor": 0.12 },        "domain": "biology", "tags": ["scale"] },
+  { "trigger": "organ",              "triggerType": "word",    "effect": { "count": 800, "shape": "wave", "tide": 0.22 },             "domain": "biology", "tags": ["scale"] },
+  { "trigger": "organism",           "triggerType": "word",    "effect": { "count": 1200, "tide": 0.18, "trails": 0.92 },             "domain": "biology", "tags": ["scale"] },
+  { "trigger": "colony",             "triggerType": "word",    "effect": { "count": 1600, "tremor": 0.18 },                           "domain": "biology", "tags": ["scale"] },
+  { "trigger": "biofilm",            "triggerType": "word",    "effect": { "count": 2400, "adhesion": 0.8, "tremor": 0.1 },           "domain": "biology", "tags": ["scale","adhesion"] },
+
+  { "trigger": "membrane",           "triggerType": "word",    "effect": { "boundary": "soft", "boundaryRadius": 0.42 },              "domain": "biology", "tags": ["structure"] },
+  { "trigger": "nucleus",            "triggerType": "word",    "effect": { "attractor": "center", "attractStrength": 0.5 },           "domain": "biology", "tags": ["structure"] },
+  { "trigger": "cytoskeleton",       "triggerType": "word",    "effect": { "shape": "lattice", "latStep": 20, "trails": 0.93 },       "domain": "biology", "tags": ["structure"] },
+  { "trigger": "microtubule",        "triggerType": "word",    "effect": { "shape": "wave", "tide": 0.26 },                            "domain": "biology", "tags": ["structure"] },
+  { "trigger": "filament",           "triggerType": "word",    "effect": { "shape": "line", "trails": 0.95 },                          "domain": "biology", "tags": ["structure"] },
+
+  { "trigger": "mycelium",           "triggerType": "word",    "effect": { "branch": true, "branchRate": 0.35, "adhesion": 0.6 },     "domain": "biology", "tags": ["network","branch"] },
+  { "trigger": "rhizome",            "triggerType": "word",    "effect": { "branch": true, "branchBias": "horizontal", "tide": 0.12 }, "domain": "biology", "tags": ["network","branch"] },
+
+  { "trigger": "chemotaxis",         "triggerType": "word",    "effect": { "chemotaxis": 0.8, "chemoTarget": "center" },               "domain": "biology", "tags": ["behavior","gradient"] },
+  { "trigger": "phototaxis",         "triggerType": "word",    "effect": { "chemotaxis": 0.6, "chemoTarget": "cursor" },               "domain": "biology", "tags": ["behavior","gradient","alias"] },
+  { "trigger": "nutrient gradient",  "triggerType": "phrase",  "effect": { "chemotaxis": 0.7, "gradientRadius": 0.5 },                 "domain": "biology", "tags": ["gradient"] },
+
+  { "trigger": "adhesion",           "triggerType": "word",    "effect": { "adhesion": 0.7 },                                          "domain": "biology", "tags": ["interaction"] },
+  { "trigger": "repulsion",          "triggerType": "word",    "effect": { "repulsion": 0.7 },                                         "domain": "biology", "tags": ["interaction"] },
+  { "trigger": "alignment",          "triggerType": "word",    "effect": { "alignment": 0.7 },                                         "domain": "biology", "tags": ["interaction"] },
+  { "trigger": "flocking",           "triggerType": "word",    "effect": { "adhesion": 0.4, "alignment": 0.6, "separation": 0.5 },     "domain": "biology", "tags": ["boids"] },
+  { "trigger": "separation",         "triggerType": "word",    "effect": { "separation": 0.7 },                                        "domain": "biology", "tags": ["interaction"] },
+
+  { "trigger": "division",           "triggerType": "word",    "effect": { "divide": true, "divisionRate": 0.25 },                     "domain": "biology", "tags": ["life-cycle"] },
+  { "trigger": "mitosis",            "triggerType": "word",    "effect": { "divide": true, "divisionRate": 0.35 },                     "domain": "biology", "tags": ["life-cycle","alias"] },
+  { "trigger": "meiosis",            "triggerType": "word",    "effect": { "divide": true, "divisionRate": 0.2, "variation": 0.3 },    "domain": "biology", "tags": ["life-cycle"] },
+  { "trigger": "apoptosis",          "triggerType": "word",    "effect": { "die": true, "deathRate": 0.15, "trails": 0.9 },            "domain": "biology", "tags": ["life-cycle"] },
+  { "trigger": "autophagy",          "triggerType": "word",    "effect": { "die": true, "deathRate": 0.08, "adhesion": 0.2 },          "domain": "biology", "tags": ["life-cycle"] },
+  { "trigger": "differentiation",    "triggerType": "word",    "effect": { "differentiate": true, "variation": 0.5 },                  "domain": "biology", "tags": ["life-cycle"] },
+
+  { "trigger": "morphogenesis",      "triggerType": "word",    "effect": { "morphogenesis": true, "patternEnergy": 0.6 },              "domain": "biology", "tags": ["pattern"] },
+  { "trigger": "reaction diffusion", "triggerType": "phrase",  "effect": { "turingPattern": "stripes", "feed": 0.036, "kill": 0.064 }, "domain": "biology", "tags": ["pattern"] },
+  { "trigger": "turing pattern",     "triggerType": "phrase",  "effect": { "turingPattern": "spots", "feed": 0.034, "kill": 0.062 },   "domain": "biology", "tags": ["pattern"] },
+  { "trigger": "zebra stripes",      "triggerType": "phrase",  "effect": { "turingPattern": "stripes" },                               "domain": "biology", "tags": ["pattern","alias"] },
+  { "trigger": "leopard spots",      "triggerType": "phrase",  "effect": { "turingPattern": "spots" },                                 "domain": "biology", "tags": ["pattern","alias"] },
+
+  { "trigger": "phyllotaxis",        "triggerType": "word",    "effect": { "shape": "spiral", "phyllo": true, "count": 1200 },         "domain": "biology", "tags": ["pattern"] },
+  { "trigger": "golden spiral",      "triggerType": "phrase",  "effect": { "shape": "spiral", "phyllo": true, "phi": 1.618 },          "domain": "biology", "tags": ["pattern"] },
+
+  { "trigger": "branching",          "triggerType": "word",    "effect": { "branch": true, "branchRate": 0.28 },                       "domain": "biology", "tags": ["growth"] },
+  { "trigger": "angiogenesis",       "triggerType": "word",    "effect": { "branch": true, "branchBias": "radial", "tide": 0.16 },     "domain": "biology", "tags": ["growth"] },
+  { "trigger": "neurogenesis",       "triggerType": "word",    "effect": { "branch": true, "branchBias": "tree", "alignment": 0.3 },   "domain": "biology", "tags": ["growth"] },
+  { "trigger": "growth cone",        "triggerType": "phrase",  "effect": { "chemotaxis": 0.7, "branch": true },                        "domain": "biology", "tags": ["growth"] },
+
+  { "trigger": "synapse",            "triggerType": "word",    "effect": { "adhesion": 0.9, "trails": 0.97 },                           "domain": "biology", "tags": ["neural"] },
+  { "trigger": "axon",               "triggerType": "word",    "effect": { "shape": "line", "tide": 0.2, "trails": 0.96 },              "domain": "biology", "tags": ["neural"] },
+  { "trigger": "dendrite",           "triggerType": "word",    "effect": { "branch": true, "branchRate": 0.22 },                        "domain": "biology", "tags": ["neural"] },
+  { "trigger": "spike",              "triggerType": "word",    "effect": { "oscillator": 6.0, "tremor": 0.22 },                         "domain": "biology", "tags": ["neural","tempo"] },
+  { "trigger": "burst",              "triggerType": "word",    "effect": { "oscillator": 2.0, "burstiness": 0.8 },                      "domain": "biology", "tags": ["neural","tempo"] },
+  { "trigger": "oscillation",        "triggerType": "word",    "effect": { "oscillator": 1.0, "tide": 0.24 },                           "domain": "biology", "tags": ["tempo"] },
+  { "trigger": "circadian",          "triggerType": "word",    "effect": { "oscillator": 0.04 },                                        "domain": "biology", "tags": ["tempo"] },
+
+  { "trigger": "quorum",             "triggerType": "word",    "effect": { "quorum": 0.65, "quorumAction": "aggregate" },              "domain": "biology", "tags": ["collective"] },
+  { "trigger": "quorum sensing",     "triggerType": "phrase",  "effect": { "quorum": 0.55, "quorumAction": "switch" },                 "domain": "biology", "tags": ["collective"] },
+
+  { "trigger": "metabolism",         "triggerType": "word",    "effect": { "energy": 0.6, "tide": 0.22 },                               "domain": "biology", "tags": ["energetics"] },
+  { "trigger": "respiration",        "triggerType": "word",    "effect": { "energy": 0.7, "trails": 0.95 },                             "domain": "biology", "tags": ["energetics"] },
+  { "trigger": "photosynthesis",     "triggerType": "word",    "effect": { "energy": 0.8, "chemotaxis": 0.5 },                          "domain": "biology", "tags": ["energetics"] },
+
+  { "trigger": "homeostasis",        "triggerType": "word",    "effect": { "tremor": 0.1, "tide": 0.18, "stability": 0.7 },            "domain": "biology", "tags": ["regulation"] },
+  { "trigger": "feedback loop",      "triggerType": "phrase",  "effect": { "stability": 0.6, "oscillator": 0.5 },                       "domain": "biology", "tags": ["regulation"] },
+
+  { "trigger": "diffusion",          "triggerType": "word",    "effect": { "tremor": 0.2, "tide": 0.12 },                               "domain": "biology", "tags": ["transport"] },
+  { "trigger": "perfusion",          "triggerType": "word",    "effect": { "flow": 0.5, "tide": 0.28 },                                 "domain": "biology", "tags": ["transport"] },
+  { "trigger": "laminar flow",       "triggerType": "phrase",  "effect": { "flow": 0.6, "tremor": 0.06 },                                "domain": "biology", "tags": ["transport"] },
+  { "trigger": "turbulence",         "triggerType": "word",    "effect": { "flow": 0.9, "tremor": 0.32 },                               "domain": "biology", "tags": ["transport"] },
+
+  { "trigger": "cilia",              "triggerType": "word",    "effect": { "wavelet": 0.6, "tide": 0.26 },                              "domain": "biology", "tags": ["motility"] },
+  { "trigger": "flagella",           "triggerType": "word",    "effect": { "wavelet": 0.8, "tide": 0.34 },                              "domain": "biology", "tags": ["motility"] },
+  { "trigger": "peristalsis",        "triggerType": "word",    "effect": { "wavefront": true, "tide": 0.22 },                           "domain": "biology", "tags": ["motility"] },
+  { "trigger": "wavefront",          "triggerType": "word",    "effect": { "wavefront": true, "shape": "ring" },                        "domain": "biology", "tags": ["motility"] },
+
+  { "trigger": "dna",                "triggerType": "word",    "effect": { "shape": "spiral", "tide": 0.2, "trails": 0.96 },            "domain": "biology", "tags": ["genetic"] },
+  { "trigger": "rna",                "triggerType": "word",    "effect": { "shape": "spiral", "tide": 0.24, "variation": 0.2 },         "domain": "biology", "tags": ["genetic"] },
+  { "trigger": "transcription",      "triggerType": "word",    "effect": { "replicate": true, "divisionRate": 0.12 },                   "domain": "biology", "tags": ["genetic"] },
+  { "trigger": "translation",        "triggerType": "word",    "effect": { "differentiate": true, "variation": 0.35 },                  "domain": "biology", "tags": ["genetic"] },
+  { "trigger": "mutation",           "triggerType": "word",    "effect": { "variation": 0.6 },                                          "domain": "biology", "tags": ["genetic"] },
+
+  { "trigger": "seed",               "triggerType": "word",    "effect": { "count": 1, "chemotaxis": 0.4 },                             "domain": "biology", "tags": ["plant"] },
+  { "trigger": "germinate",          "triggerType": "word",    "effect": { "divide": true, "branch": true, "branchRate": 0.2 },         "domain": "biology", "tags": ["plant"] },
+  { "trigger": "sprout",             "triggerType": "word",    "effect": { "branch": true, "branchRate": 0.26, "tide": 0.18 },          "domain": "biology", "tags": ["plant"] },
+  { "trigger": "bloom",              "triggerType": "word",    "effect": { "trails": 0.95, "tide": 0.24, "morphogenesis": true },       "domain": "biology", "tags": ["plant"] },
+  { "trigger": "wither",             "triggerType": "word",    "effect": { "die": true, "deathRate": 0.1, "trails": 0.88 },             "domain": "biology", "tags": ["plant"] },
+  { "trigger": "decay",              "triggerType": "word",    "effect": { "die": true, "deathRate": 0.18, "adhesion": 0.2 },           "domain": "biology", "tags": ["plant","cycle"] },
+
+  { "trigger": "bioelectric",        "triggerType": "word",    "effect": { "alignment": 0.4, "oscillator": 0.8 },                       "domain": "biology", "tags": ["signal"] },
+  { "trigger": "hormone",            "triggerType": "word",    "effect": { "quorum": 0.5, "quorumAction": "modulate" },                 "domain": "biology", "tags": ["signal"] },
+  { "trigger": "neurotransmitter",   "triggerType": "word",    "effect": { "adhesion": 0.2, "alignment": 0.5, "oscillator": 1.5 },      "domain": "biology", "tags": ["signal"] },
+
+  { "trigger": "extracellular matrix","triggerType": "phrase", "effect": { "viscosity": 0.6, "adhesion": 0.5 },                          "domain": "biology", "tags": ["environment"] },
+  { "trigger": "viscosity",          "triggerType": "word",    "effect": { "viscosity": 0.7 },                                           "domain": "biology", "tags": ["environment"] },
+  { "trigger": "temperature",        "triggerType": "word",    "effect": { "tremor": 0.0 },                                              "domain": "biology", "tags": ["environment"], "notes": "Pair with warm/cold deltas" },
+  { "trigger": "warm",               "triggerType": "word",    "effect": { "tremor": 0.08 },                                             "domain": "biology", "tags": ["environment","delta"] },
+  { "trigger": "cold",               "triggerType": "word",    "effect": { "tremor": -0.06 },                                            "domain": "biology", "tags": ["environment","delta"] },
+  { "trigger": "ph shift",           "triggerType": "phrase",  "effect": { "variation": 0.25 },                                          "domain": "biology", "tags": ["environment"] },
+
+  { "trigger": "diffusion limited aggregation", "triggerType": "phrase", "effect": { "dla": true, "seedSites": 6, "trails": 0.97 },     "domain": "biology", "tags": ["pattern","growth"] },
+  { "trigger": "crystal growth",     "triggerType": "phrase",  "effect": { "dla": true, "seedSites": 3, "tremor": 0.04 },               "domain": "biology", "tags": ["pattern","growth"] },
+
+  { "trigger": "wound",              "triggerType": "word",    "effect": { "chemotaxis": 0.9, "chemoTarget": "center", "adhesion": 0.8 }, "domain": "biology", "tags": ["repair"] },
+  { "trigger": "scar",               "triggerType": "word",    "effect": { "adhesion": 0.95, "trails": 0.98 },                           "domain": "biology", "tags": ["repair"] },
+  { "trigger": "regenerate",         "triggerType": "word",    "effect": { "divide": true, "divisionRate": 0.3, "morphogenesis": true }, "domain": "biology", "tags": ["repair"] },
+
+  { "trigger": "bioluminescence",    "triggerType": "word",    "effect": { "glow": 0.5, "trails": 0.97 },                                "domain": "biology", "tags": ["appearance"] },
+  { "trigger": "chlorophyll",        "triggerType": "word",    "effect": { "accent": "#E8FF66" },                                       "domain": "biology", "tags": ["appearance"] },
+
+  { "trigger": "petri dish",         "triggerType": "phrase",  "effect": { "boundary": "hard", "boundaryRadius": 0.46, "shape": "ring" }, "domain": "biology", "tags": ["scene"] },
+  { "trigger": "microscope",         "triggerType": "word",    "effect": { "camera": { "zoom": 0.8 } },                                  "domain": "biology", "tags": ["scene"] },
+  { "trigger": "macro",              "triggerType": "word",    "effect": { "camera": { "zoom": 0.5 } },                                  "domain": "biology", "tags": ["scene"] },
+
+  { "trigger": "embryo",             "triggerType": "word",    "effect": { "divide": true, "divisionRate": 0.5, "morphogenesis": true }, "domain": "biology", "tags": ["development"] },
+  { "trigger": "gastrulation",       "triggerType": "word",    "effect": { "shape": "ring", "wavefront": true, "tide": 0.2 },            "domain": "biology", "tags": ["development"] },
+  { "trigger": "somite",             "triggerType": "word",    "effect": { "latticeStripe": true, "tide": 0.14 },                        "domain": "biology", "tags": ["development"] },
+
+  { "trigger": "immune swarm",       "triggerType": "phrase",  "effect": { "count": 1200, "chemotaxis": 0.8, "repulsion": 0.6 },         "domain": "biology", "tags": ["immune"] },
+  { "trigger": "inflammation",       "triggerType": "word",    "effect": { "count": 1600, "tremor": 0.3, "trails": 0.9 },                "domain": "biology", "tags": ["immune"] },
+  { "trigger": "healing",            "triggerType": "word",    "effect": { "adhesion": 0.8, "divide": true, "divisionRate": 0.2 },       "domain": "biology", "tags": ["immune"] },
+
+  { "trigger": "ecosystem",          "triggerType": "word",    "effect": { "count": 2400, "tremor": 0.2, "alignment": 0.3 },             "domain": "biology", "tags": ["ecology"] },
+  { "trigger": "predator prey",      "triggerType": "phrase",  "effect": { "roles": "predatorPrey", "variation": 0.4 },                  "domain": "biology", "tags": ["ecology"] },
+  { "trigger": "mutualism",          "triggerType": "word",    "effect": { "adhesion": 0.7, "alignment": 0.5 },                          "domain": "biology", "tags": ["ecology"] },
+  { "trigger": "competition",        "triggerType": "word",    "effect": { "repulsion": 0.7 },                                           "domain": "biology", "tags": ["ecology"] },
+
+  { "trigger": "stem cell",          "triggerType": "phrase",  "effect": { "divide": true, "divisionRate": 0.3, "differentiate": true }, "domain": "biology", "tags": ["stem"] },
+  { "trigger": "lineage",            "triggerType": "word",    "effect": { "lineageTrace": true, "trails": 0.98 },                       "domain": "biology", "tags": ["stem"] },
+
+  { "trigger": "noise",              "triggerType": "word",    "effect": { "variation": 0.15 },                                          "domain": "biology", "tags": ["stochastic"] },
+  { "trigger": "stochastic",         "triggerType": "word",    "effect": { "variation": 0.3 },                                           "domain": "biology", "tags": ["stochastic"] },
+
+  { "trigger": "coagulate",          "triggerType": "word",    "effect": { "adhesion": 0.95, "tremor": 0.04 },                           "domain": "biology", "tags": ["material"] },
+  { "trigger": "fluidize",           "triggerType": "word",    "effect": { "adhesion": 0.1, "tremor": 0.22 },                            "domain": "biology", "tags": ["material"] },
+
+  { "trigger": "ring colony",        "triggerType": "phrase",  "effect": { "shape": "ring", "count": 1600, "adhesion": 0.8 },            "domain": "biology", "tags": ["motif"] },
+  { "trigger": "branching coral",    "triggerType": "phrase",  "effect": { "branch": true, "branchRate": 0.32, "trails": 0.96 },         "domain": "biology", "tags": ["motif"] },
+  { "trigger": "neuronal tree",      "triggerType": "phrase",  "effect": { "branch": true, "branchBias": "tree", "trails": 0.97 },       "domain": "biology", "tags": ["motif"] }
+]
