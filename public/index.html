@@ -1,102 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verse Lab</title>
-  <link rel="stylesheet" href="./css/style.css" />
-  <style>
-    html, body { margin:0; height:100%; background:#000; color:#fff; font:16px -apple-system,system-ui,ui-monospace }
-    canvas { position:fixed; inset:0; display:block; background:#000 }
-    .sheet{position:fixed;left:0;right:0;bottom:0;transform:translateY(100%);
-      background:rgba(12,12,14,.78);backdrop-filter:saturate(1.2) blur(10px);
-      border-top:1px solid rgba(255,255,255,.12);padding:14px;
-      transition:transform .2s ease;z-index:10}
-    .sheet.open{transform:translateY(0)}
-    textarea{width:100%;min-height:120px;max-height:40vh;
-      border:1px solid rgba(255,255,255,.2);background:#0b0c0f;color:#fff;
-      border-radius:12px;padding:12px;font:16px ui-monospace,monospace;
-      outline:none;resize:none}
-    .row{display:flex;gap:10px;margin-top:10px}
-    .btn{flex:0 0 auto;border:1px solid rgba(255,255,255,.2);background:#fff;color:#000;
-      border-radius:999px;padding:8px 14px;font-weight:600}
-    .btn.ghost{background:transparent;color:#fff}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Verse Lab</title>
+<style>
+  html,body{margin:0;height:100%;background:#000;color:#fff;font:16px -apple-system,system-ui,ui-monospace}
+  canvas{position:fixed;inset:0;display:block;background:#000}
+  .sheet{position:fixed;left:0;right:0;bottom:0;transform:translateY(100%);
+    background:rgba(12,12,14,.78);backdrop-filter:saturate(1.2) blur(10px);
+    border-top:1px solid rgba(255,255,255,.12);padding:14px;transition:transform .2s ease;z-index:10}
+  .sheet.open{transform:translateY(0)}
+  textarea{width:100%;min-height:120px;max-height:40vh;border:1px solid rgba(255,255,255,.2);background:#0b0c0f;color:#fff;
+    border-radius:12px;padding:12px;font:16px ui-monospace,monospace;outline:none;resize:none}
+  .row{display:flex;gap:10px;margin-top:10px}
+  .btn{flex:0 0 auto;border:1px solid rgba(255,255,255,.2);background:#fff;color:#000;border-radius:999px;padding:8px 14px;font-weight:600}
+  .btn.ghost{background:transparent;color:#fff}
+  .hint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);color:#9aa3ad;font:14px/1.4;opacity:.8;text-align:center;user-select:none}
+</style>
 </head>
 <body>
   <canvas id="stage"></canvas>
 
+  <div id="hint" class="hint">tap to paste a seed</div>
+
   <!-- Paste overlay -->
   <div class="sheet" id="sheet">
-    <textarea id="seedBox" maxlength="280" spellcheck="false"
-              placeholder="Paste (≤280 chars) and Apply…"></textarea>
+    <textarea id="seedBox" maxlength="4000" spellcheck="false" placeholder="Paste text and Apply…"></textarea>
     <div class="row">
       <button class="btn" id="apply">Apply</button>
       <button class="btn ghost" id="close">Close</button>
     </div>
   </div>
 
-  <!-- Scripts: load in order -->
-  <script src="./js/resolver.js"></script>
-  <script src="./js/spellbook-resolver.js"></script>
-  <script src="./js/engine.js"></script>
-</body>
-</html>
+  <!-- Module entry: imports your ES modules and boots -->
+  <script type="module">
+    import { loadBooks, resolve } from './js/resolver.js';
+    import { makeEngine } from './js/engine.js';
 
-<script type="module">
-  import { loadBooks, resolve } from './js/resolver.js';
-  import { makeEngine } from './js/engine.js';
+    console.log('[Verse] boot');
 
-  const canvas = document.getElementById('stage');
-  const engine = makeEngine(canvas);
+    const canvas = document.getElementById('stage');
+    const sheet  = document.getElementById('sheet');
+    const box    = document.getElementById('seedBox');
+    const hint   = document.getElementById('hint');
 
-  const sheet = document.getElementById('sheet');
-  const box   = document.getElementById('seedBox');
-  const hint  = document.getElementById('hint');
+    const engine = makeEngine(canvas);
 
-  function openSheet(){ sheet.classList.add('open'); box.focus(); setTimeout(()=>box.select(),0); }
-  function closeSheet(){ sheet.classList.remove('open'); }
+    function openSheet(){ sheet.classList.add('open'); box.focus(); setTimeout(()=>box.select(),0); }
+    function closeSheet(){ sheet.classList.remove('open'); }
 
-  // tap anywhere to open
-  addEventListener('click', (e)=>{ if(!sheet.contains(e.target)) openSheet(); });
-  document.getElementById('apply').onclick = applySeed;
-  document.getElementById('close').onclick = ()=> closeSheet();
+    addEventListener('click',(e)=>{ if(!sheet.contains(e.target)) openSheet(); });
 
-  async function applySeed(){
-    const text = (box.value || '').trim();
-    if(!text) return;
-    const state = await resolve(text);
-    // params
-    engine.applyParams(state.params);
-    // meta
-    for(const m of state.metaEvents) engine.applyMeta(m);
-    // masks / laws / silences (no-ops until you wire deeper)
-    for(const s of state.silences) engine.applySilence?.(s);
-    for(const k of state.masks) engine.applyMask?.(k);
-    engine.kick();
-    hint.style.display='none';
-    closeSheet();
-  }
+    document.getElementById('apply').onclick = applySeed;
+    document.getElementById('close').onclick = ()=> closeSheet();
 
-  // boot
-  await loadBooks();
-  // auto-paste if clipboard has text (best effort; user gesture required on some browsers)
-  try {
-    const t = await navigator.clipboard.readText();
-    if(t && t.trim().length){
-      box.value = t.trim();
-      await applySeed();
+    async function applySeed(){
+      const text = (box.value||'').trim();
+      if(!text) return;
+      const state = await resolve(text);
+      engine.applyParams(state.params);
+      for(const m of state.metaEvents) engine.applyMeta(m);
+      engine.kick();
+      hint.style.display='none';
+      closeSheet();
     }
-  } catch(_) {}
 
-  // URL ?seed= support
-  const q = new URLSearchParams(location.search);
-  if(q.has('seed')){ box.value = q.get('seed'); await applySeed(); }
+    // hard safety: ensure something shows even if books fail
+    function showHello(){
+      engine.applyParams({ count: 400, shape: 'ring', trails: 0.96, tremor: 0.08, tide: 0.12 });
+      engine.kick();
+    }
 
-  // first frame
-  engine.kick();
+    try{
+      await loadBooks();
+      console.log('[Verse] books loaded');
+    }catch(err){
+      console.error('[Verse] failed to load books', err);
+      showHello();
+      return;
+    }
 
+    // URL ?seed= support
+    const q = new URLSearchParams(location.search);
+    if(q.has('seed')){
+      box.value = q.get('seed');
+      await applySeed();
+    }else{
+      // draw something at boot so screen isn’t blank
+      showHello();
+    }
 
-<script>
+    // optional: best-effort auto-paste if clipboard has text (requires permission)
+    try{
+      const t = await navigator.clipboard.readText();
+      if(t && t.trim().length && !q.has('seed')){
+        box.value = t.trim();
+        await applySeed();
+      }
+    }catch(_){}
+  </script>
 </body>
 </html>
