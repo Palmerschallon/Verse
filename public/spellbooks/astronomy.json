@@ -1,0 +1,17 @@
+[
+  { "trigger": "starfield",        "triggerType": "word",   "effect": { "count": 1200, "tremor": 0.08, "trails": 0.96 },             "domain": "astronomy", "tags": ["population"] },
+  { "trigger": "nebula",           "triggerType": "word",   "effect": { "tremor": 0.22, "trails": 0.97, "grade": { "bloom": 0.18 } }, "domain": "astronomy", "tags": ["gas","bloom"] },
+  { "trigger": "spiral galaxy",    "triggerType": "phrase", "effect": { "shape": "spiral", "count": 1600, "tide": 0.24 },            "domain": "astronomy", "tags": ["shape"] },
+  { "trigger": "elliptical galaxy","triggerType": "phrase", "effect": { "shape": "ring", "tremor": 0.06, "trails": 0.97 },           "domain": "astronomy", "tags": ["shape"] },
+  { "trigger": "event horizon",    "triggerType": "phrase", "effect": { "boundary": "hard", "boundaryRadius": 0.32, "trails": 0.98 }, "domain": "astronomy", "tags": ["boundary"] },
+  { "trigger": "singularity",      "triggerType": "word",   "effect": { "attractor": "center", "attractStrength": 0.9, "trails": 0.99 }, "domain": "astronomy", "tags": ["gravity"] },
+  { "trigger": "accretion disk",   "triggerType": "phrase", "effect": { "shape": "ring", "tide": 0.28, "trails": 0.94 },              "domain": "astronomy", "tags": ["flow"] },
+  { "trigger": "comet",            "triggerType": "word",   "effect": { "count": 1, "tremor": 0.16, "trails": 0.98 },                 "domain": "astronomy", "tags": ["agent"] },
+  { "trigger": "meteor shower",    "triggerType": "phrase", "effect": { "count": 800, "tide": 0.36, "trails": 0.9 },                  "domain": "astronomy", "tags": ["burst"] },
+  { "trigger": "supernova",        "triggerType": "word",   "effect": { "explode": true, "energy": 1.0, "trails": 0.92 },             "domain": "astronomy", "tags": ["explosion"] },
+  { "trigger": "pulsar",           "triggerType": "word",   "effect": { "oscillator": 3.0, "tremor": 0.2 },                            "domain": "astronomy", "tags": ["tempo"] },
+  { "trigger": "eclipse",          "triggerType": "word",   "effect": { "mask": "circle", "grade": { "contrast": -0.05 } },           "domain": "astronomy", "tags": ["mask"] },
+  { "trigger": "aurora",           "triggerType": "word",   "effect": { "grade": { "bloom": 0.25 }, "tide": 0.2 },                     "domain": "astronomy", "tags": ["atmosphere"] },
+  { "trigger": "gravitational lens","triggerType": "phrase","effect": { "camera": { "distort": 0.35 } },                               "domain": "astronomy", "tags": ["camera"] },
+  { "trigger": "cosmic microwave background","triggerType": "phrase","effect": { "grain": 0.18, "trails": 0.97 },                      "domain": "astronomy", "tags": ["texture"] }
+]
