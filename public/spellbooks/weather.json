@@ -1,69 +1,82 @@
 [
-  /* ——— Existing-capable primitives (immediate) ——— */
-  { "trigger": "line",              "triggerType": "word",   "effect": { "shape": "line" },                "domain": "geometry", "tags": ["primitive"] },
-  { "trigger": "arc",               "triggerType": "word",   "effect": { "shape": "arc" },                 "domain": "geometry", "tags": ["primitive"] },
-  { "trigger": "ellipse",           "triggerType": "word",   "effect": { "shape": "ellipse" },             "domain": "geometry", "tags": ["primitive"] },
-  { "trigger": "ring",              "triggerType": "word",   "effect": { "shape": "ring" },                "domain": "geometry", "tags": ["primitive"] },
-  { "trigger": "spiral",            "triggerType": "word",   "effect": { "shape": "spiral" },              "domain": "geometry", "tags": ["curve"] },
-  { "trigger": "lattice",           "triggerType": "word",   "effect": { "shape": "lattice" },             "domain": "geometry", "tags": ["grid"] },
-  { "trigger": "grid",              "triggerType": "alias",  "effect": { "shape": "lattice" },             "domain": "geometry", "tags": ["grid","alias"] },
-  { "trigger": "triangle",          "triggerType": "word",   "effect": { "shape": "triangle" },            "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "square",            "triggerType": "word",   "effect": { "shape": "square" },              "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "star",              "triggerType": "word",   "effect": { "shape": "star" },                "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "lemniscate",        "triggerType": "word",   "effect": { "shape": "lemniscate" },          "domain": "geometry", "tags": ["curve"] },
-  { "trigger": "lissajous",         "triggerType": "word",   "effect": { "shape": "lissajous" },           "domain": "geometry", "tags": ["curve"] },
-  { "trigger": "rose curve",        "triggerType": "phrase", "effect": { "shape": "rose" },                "domain": "geometry", "tags": ["curve"] },
-  { "trigger": "heart",             "triggerType": "word",   "effect": { "shape": "heart" },               "domain": "geometry", "tags": ["curve"] },
+  /* Atmosphere / base mood */
+  { "trigger": "clear sky",          "triggerType": "phrase", "effect": { "grain": 0.02, "trails": 0.97 },               "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "haze",               "triggerType": "word",   "effect": { "grain": 0.12, "trails": 0.94 },               "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "mist",               "triggerType": "word",   "effect": { "grain": 0.18, "trails": 0.96 },               "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "fog",                "triggerType": "word",   "effect": { "grain": 0.24, "trails": 0.98 },               "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "smoke",              "triggerType": "word",   "effect": { "grain": 0.28, "tremor": 0.08 },               "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "overcast",           "triggerType": "word",   "effect": { "grade": { "contrast": -0.05 } },              "domain": "weather", "tags": ["atmosphere"] },
+  { "trigger": "low ceiling",        "triggerType": "phrase", "effect": { "mask": "letterbox", "grade": { "contrast": -0.06 } }, "domain": "weather", "tags": ["atmosphere"] },
 
-  /* ——— Parametric polygons (near-term renderer: poly sampler) ——— */
-  { "trigger": "polygon",           "triggerType": "word",   "effect": { "shape": "poly", "sides": 5 },    "domain": "geometry", "tags": ["polygon"], "notes": "Default pentagon" },
-  { "trigger": "pentagon",          "triggerType": "word",   "effect": { "shape": "poly", "sides": 5 },    "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "hexagon",           "triggerType": "word",   "effect": { "shape": "poly", "sides": 6 },    "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "heptagon",          "triggerType": "word",   "effect": { "shape": "poly", "sides": 7 },    "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "octagon",           "triggerType": "word",   "effect": { "shape": "poly", "sides": 8 },    "domain": "geometry", "tags": ["polygon"] },
-  { "trigger": "<n>-gon",           "triggerType": "pattern","effect": { "shape": "poly", "sides": "<int>" }, "domain": "geometry", "tags": ["polygon"], "notes": "e.g. '11-gon' → sides:11" },
+  /* Wind field (direction & strength) */
+  { "trigger": "calm winds",         "triggerType": "phrase", "effect": { "tide": 0.08 },                                "domain": "weather", "tags": ["wind"] },
+  { "trigger": "breeze",             "triggerType": "word",   "effect": { "field": "perlin", "tide": 0.16 },             "domain": "weather", "tags": ["wind"] },
+  { "trigger": "gust",               "triggerType": "word",   "effect": { "field": "perlin", "tide": 0.28, "variation": 0.2 }, "domain": "weather", "tags": ["wind"] },
+  { "trigger": "gale",               "triggerType": "word",   "effect": { "field": "curl", "tide": 0.36, "tremor": 0.18 }, "domain": "weather", "tags": ["wind"] },
+  { "trigger": "squall",             "triggerType": "word",   "effect": { "field": "curl", "tide": 0.42, "variation": 0.3 }, "domain": "weather", "tags": ["wind"] },
+  { "trigger": "crosswind",          "triggerType": "word",   "effect": { "camera": { "panX": 0.6 }, "tide": 0.22 },      "domain": "weather", "tags": ["wind"] },
+  { "trigger": "headwind",           "triggerType": "word",   "effect": { "camera": { "panY": -0.4 }, "tide": 0.2 },      "domain": "weather", "tags": ["wind"] },
+  { "trigger": "tailwind",           "triggerType": "word",   "effect": { "camera": { "panY": 0.4 }, "tide": 0.2 },       "domain": "weather", "tags": ["wind"] },
 
-  /* ——— Superformula / superellipse (next renderer: superformula sampler) ——— */
-  { "trigger": "superellipse",      "triggerType": "word",   "effect": { "shape": "superellipse", "n": 2.5 },     "domain": "geometry", "tags": ["superformula"] },
-  { "trigger": "rounded square",    "triggerType": "phrase", "effect": { "shape": "superellipse", "n": 4.0 },     "domain": "geometry", "tags": ["superformula"] },
-  { "trigger": "superformula flower","triggerType": "phrase","effect": { "shape": "superformula", "m": 6, "a": 1, "b": 1, "n1": 0.3, "n2": 0.3, "n3": 0.3 }, "domain": "geometry", "tags": ["superformula"] },
+  /* Rain variants */
+  { "trigger": "drizzle",            "triggerType": "word",   "effect": { "count": 600, "trails": 0.92, "tide": 0.22 },   "domain": "weather", "tags": ["rain"] },
+  { "trigger": "rain",               "triggerType": "word",   "effect": { "count": 1200, "trails": 0.9, "tide": 0.28 },   "domain": "weather", "tags": ["rain"] },
+  { "trigger": "downpour",           "triggerType": "word",   "effect": { "count": 2000, "trails": 0.88, "tide": 0.36 },  "domain": "weather", "tags": ["rain"] },
+  { "trigger": "sheet rain",         "triggerType": "phrase", "effect": { "shape": "line", "count": 1600, "tide": 0.32 }, "domain": "weather", "tags": ["rain"] },
+  { "trigger": "rain band",          "triggerType": "phrase", "effect": { "shape": "line", "count": 800, "tide": 0.26 },  "domain": "weather", "tags": ["rain"] },
+  { "trigger": "virga",              "triggerType": "word",   "effect": { "trails": 0.98, "tide": 0.18 },                  "domain": "weather", "tags": ["rain"] },
 
-  /* ——— Spirographs (epi/hypotrochoids) ——— */
-  { "trigger": "spirograph",        "triggerType": "word",   "effect": { "shape": "spiro", "R": 180, "r": 40, "p": 60 }, "domain": "geometry", "tags": ["trochoid"] },
-  { "trigger": "epitrochoid",       "triggerType": "word",   "effect": { "shape": "spiro", "mode": "epi",  "R": 160, "r": 48, "p": 50 }, "domain": "geometry", "tags": ["trochoid"] },
-  { "trigger": "hypotrochoid",      "triggerType": "word",   "effect": { "shape": "spiro", "mode": "hypo", "R": 180, "r": 72, "p": 28 }, "domain": "geometry", "tags": ["trochoid"] },
+  /* Snow / ice */
+  { "trigger": "flurry",             "triggerType": "word",   "effect": { "count": 600, "tremor": 0.12, "trails": 0.96 },  "domain": "weather", "tags": ["snow"] },
+  { "trigger": "snow",               "triggerType": "word",   "effect": { "count": 1400, "tremor": 0.1, "trails": 0.97 },  "domain": "weather", "tags": ["snow"] },
+  { "trigger": "blizzard",           "triggerType": "word",   "effect": { "count": 2200, "tremor": 0.24, "tide": 0.38 },   "domain": "weather", "tags": ["snow"] },
+  { "trigger": "sleet",              "triggerType": "word",   "effect": { "count": 1000, "trails": 0.9 },                  "domain": "weather", "tags": ["ice"] },
+  { "trigger": "freezing rain",      "triggerType": "phrase", "effect": { "glaze": 0.6, "trails": 0.98 },                  "domain": "weather", "tags": ["ice"] },
+  { "trigger": "rime",               "triggerType": "word",   "effect": { "grain": 0.22, "glow": 0.18 },                    "domain": "weather", "tags": ["ice"] },
 
-  /* ——— Fields & tessellations (forward-compat; renderer: sampler grid) ——— */
-  { "trigger": "voronoi",           "triggerType": "word",   "effect": { "voronoi": true, "count": 600 },         "domain": "geometry", "tags": ["tessellation"] },
-  { "trigger": "delaunay",          "triggerType": "word",   "effect": { "delaunay": true, "count": 600 },        "domain": "geometry", "tags": ["tessellation"] },
-  { "trigger": "tiling",            "triggerType": "word",   "effect": { "tiling": "regular", "count": 900 },     "domain": "geometry", "tags": ["tessellation"] },
-  { "trigger": "penrose",           "triggerType": "word",   "effect": { "tiling": "penrose", "count": 1200 },    "domain": "geometry", "tags": ["tessellation","quasi"] },
+  /* Convective energy / fronts */
+  { "trigger": "heat",               "triggerType": "word",   "effect": { "energy": 0.5, "tremor": 0.14 },                 "domain": "weather", "tags": ["energy"] },
+  { "trigger": "heat dome",          "triggerType": "phrase", "effect": { "energy": 0.8, "boundary": "hard", "boundaryRadius": 0.42 }, "domain": "weather", "tags": ["energy"] },
+  { "trigger": "cold front",         "triggerType": "phrase", "effect": { "field": "radialOut", "tide": 0.22, "grade": { "contrast": 0.05 } }, "domain": "weather", "tags": ["front"] },
+  { "trigger": "warm front",         "triggerType": "phrase", "effect": { "field": "radialIn",  "tide": 0.18, "grain": 0.08 }, "domain": "weather", "tags": ["front"] },
+  { "trigger": "dry line",           "triggerType": "phrase", "effect": { "shape": "line", "tremor": 0.16, "variation": 0.2 }, "domain": "weather", "tags": ["front"] },
+  { "trigger": "outflow boundary",   "triggerType": "phrase", "effect": { "wavefront": true, "tide": 0.26 },  "domain": "weather", "tags": ["front"] },
 
-  /* ——— Fractals & growth (many you already hint at) ——— */
-  { "trigger": "koch snowflake",    "triggerType": "phrase", "effect": { "fractal": "koch", "iterations": 4 },   "domain": "geometry", "tags": ["fractal"] },
-  { "trigger": "sierpinski",        "triggerType": "word",   "effect": { "fractal": "sierpinski", "iterations": 5 }, "domain": "geometry", "tags": ["fractal"] },
-  { "trigger": "l-system tree",     "triggerType": "phrase", "effect": { "lsys": true, "axiom": "F", "rules": { "F": "F[+F]F[-F]F" }, "angle": 25 }, "domain": "geometry", "tags": ["lsys"] },
-  { "trigger": "branching fractal", "triggerType": "phrase", "effect": { "branch": true, "branchRate": 0.32 },   "domain": "geometry", "tags": ["fractal","growth"] },
+  /* Thunder / storm structure */
+  { "trigger": "thunderstorm",       "triggerType": "word",   "effect": { "energy": 0.9, "tide": 0.38, "tremor": 0.22 },    "domain": "weather", "tags": ["storm"] },
+  { "trigger": "supercell",          "triggerType": "word",   "effect": { "shape": "spiral", "count": 1600, "energy": 1.0 }, "domain": "weather", "tags": ["storm"] },
+  { "trigger": "mesocyclone",        "triggerType": "word",   "effect": { "shape": "spiral", "tide": 0.34 },                 "domain": "weather", "tags": ["storm"] },
+  { "trigger": "wall cloud",         "triggerType": "phrase", "effect": { "boundary": "soft", "boundaryRadius": 0.52 },      "domain": "weather", "tags": ["storm"] },
+  { "trigger": "anvil",              "triggerType": "word",   "effect": { "mask": "letterbox", "grade": { "contrast": -0.04 } }, "domain": "weather", "tags": ["storm"] },
+  { "trigger": "lightning",          "triggerType": "word",   "effect": { "glow": 0.9, "trails": 0.84 },                      "domain": "weather", "tags": ["storm"] },
+  { "trigger": "cloud-to-ground",    "triggerType": "phrase", "effect": { "shape": "line", "glow": 1.0 },                      "domain": "weather", "tags": ["storm"] },
+  { "trigger": "cloud-to-cloud",     "triggerType": "phrase", "effect": { "shape": "lattice", "glow": 0.6 },                   "domain": "weather", "tags": ["storm"] },
 
-  /* ——— Flow maps & vector fields ——— */
-  { "trigger": "curl noise",        "triggerType": "phrase", "effect": { "field": "curl", "tide": 0.24 },         "domain": "geometry", "tags": ["field"] },
-  { "trigger": "perlin flow",       "triggerType": "phrase", "effect": { "field": "perlin", "tremor": 0.18 },     "domain": "geometry", "tags": ["field"] },
-  { "trigger": "divergence",        "triggerType": "word",   "effect": { "field": "radialOut", "tide": 0.3 },     "domain": "geometry", "tags": ["field"] },
-  { "trigger": "convergence",       "triggerType": "word",   "effect": { "field": "radialIn",  "tide": 0.2 },     "domain": "geometry", "tags": ["field"] },
+  /* Tropical */
+  { "trigger": "tropical depression","triggerType": "phrase", "effect": { "shape": "spiral", "count": 800, "tide": 0.22 },    "domain": "weather", "tags": ["tropical"] },
+  { "trigger": "tropical storm",     "triggerType": "phrase", "effect": { "shape": "spiral", "count": 1200, "tide": 0.3 },    "domain": "weather", "tags": ["tropical"] },
+  { "trigger": "hurricane",          "triggerType": "word",   "effect": { "shape": "spiral", "count": 2000, "tide": 0.4 },    "domain": "weather", "tags": ["tropical"] },
+  { "trigger": "eye wall",           "triggerType": "phrase", "effect": { "ringWall": true, "shape": "ring" },                "domain": "weather", "tags": ["tropical"] },
 
-  /* ——— Contours & isosurfaces (2D) ——— */
-  { "trigger": "contour map",       "triggerType": "phrase", "effect": { "contours": true, "levels": 12 },        "domain": "geometry", "tags": ["contour"] },
-  { "trigger": "metaballs",         "triggerType": "word",   "effect": { "metaballs": true, "count": 40 },        "domain": "geometry", "tags": ["implicit"] },
+  /* Precipitation extras */
+  { "trigger": "hail",               "triggerType": "word",   "effect": { "count": 400, "trails": 0.85, "tremor": 0.14 },    "domain": "weather", "tags": ["hail"] },
+  { "trigger": "graupel",            "triggerType": "word",   "effect": { "count": 800, "trails": 0.9, "grain": 0.14 },      "domain": "weather", "tags": ["hail"] },
 
-  /* ——— Space carving (masks) ——— */
-  { "trigger": "aperture",          "triggerType": "word",   "effect": { "mask": "circle", "maskFeather": 0.2 },  "domain": "geometry", "tags": ["mask"] },
-  { "trigger": "window",            "triggerType": "word",   "effect": { "mask": "square", "maskFeather": 0.1 },  "domain": "geometry", "tags": ["mask"] },
+  /* Hydrology / rivers */
+  { "trigger": "river",              "triggerType": "word",   "effect": { "shape": "wave", "tide": 0.2, "trails": 0.96 },    "domain": "weather", "tags": ["hydrology"] },
+  { "trigger": "meander",            "triggerType": "word",   "effect": { "shape": "wave", "tide": 0.16, "variation": 0.2 }, "domain": "weather", "tags": ["hydrology"] },
+  { "trigger": "delta",              "triggerType": "word",   "effect": { "branch": true, "branchRate": 0.2 },               "domain": "weather", "tags": ["hydrology"] },
+  { "trigger": "confluence",         "triggerType": "word",   "effect": { "alignment": 0.5, "adhesion": 0.5 },               "domain": "weather", "tags": ["hydrology"] },
 
-  /* ——— Layout / packing ——— */
-  { "trigger": "circle packing",    "triggerType": "phrase", "effect": { "packing": "circles", "count": 800 },    "domain": "geometry", "tags": ["packing"] },
-  { "trigger": "hex packing",       "triggerType": "phrase", "effect": { "packing": "hex", "count": 900 },        "domain": "geometry", "tags": ["packing"] },
+  /* Seasons / diurnal */
+  { "trigger": "dawn",               "triggerType": "word",   "effect": { "grade": { "contrast": -0.02, "bloom": 0.06 }, "timeScale": 0.8 }, "domain": "weather", "tags": ["diurnal"] },
+  { "trigger": "noon",               "triggerType": "word",   "effect": { "grade": { "contrast":  0.02 }, "timeScale": 1.0 }, "domain": "weather", "tags": ["diurnal"] },
+  { "trigger": "dusk",               "triggerType": "word",   "effect": { "grade": { "contrast": -0.03, "bloom": 0.08 }, "timeScale": 0.8 }, "domain": "weather", "tags": ["diurnal"] },
+  { "trigger": "midnight",           "triggerType": "word",   "effect": { "grain": 0.06, "timeScale": 0.6 },                 "domain": "weather", "tags": ["diurnal"] },
 
-  /* ——— Path variations (fine control) ——— */
-  { "trigger": "coarse sampling",   "triggerType": "phrase", "effect": { "sampleStride": 6 },                     "domain": "geometry", "tags": ["sampling"] },
-  { "trigger": "fine sampling",     "triggerType": "phrase", "effect": { "sampleStride": 1 },                     "domain": "geometry", "tags": ["sampling"] }
+  /* Extremes / dust / fire / ash */
+  { "trigger": "dust storm",         "triggerType": "phrase", "effect": { "grain": 0.34, "tremor": 0.2, "tide": 0.28 },      "domain": "weather", "tags": ["extreme"] },
+  { "trigger": "sandstorm",          "triggerType": "word",   "effect": { "grain": 0.36, "tremor": 0.22, "tide": 0.28 },     "domain": "weather", "tags": ["extreme"] },
+  { "trigger": "wildfire",           "triggerType": "word",   "effect": { "glow": 0.6, "grain": 0.22, "variation": 0.26 },   "domain": "weather", "tags": ["extreme"] },
+  { "trigger": "ash fall",           "triggerType": "phrase", "effect": { "grain": 0.3, "count": 1000, "trails": 0.94 },     "domain": "weather", "tags": ["extreme"] }
 ]
