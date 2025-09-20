@@ -1,0 +1,19 @@
+{
+  "books": [
+    "core.json",
+    "geometry.json",
+    "artists.json",
+    "cinema.json",
+    "biology.json",
+    "weather.json",
+    "impossible.json",
+    "consciousness.json",
+    "fog.json",
+    "catastrophes.json",
+    "laws.json",
+    "masks.json",
+    "silence.json",
+    "self.json",
+    
+  ]
+}
