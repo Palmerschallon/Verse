@@ -1,0 +1,85 @@
+[
+  /* Automata & logic */
+  { "trigger": "cellular automaton", "triggerType": "phrase", "effect": { "automaton": "generic", "count": 800 },      "domain": "computation", "tags": ["automata"] },
+  { "trigger": "game of life",       "triggerType": "phrase", "effect": { "automaton": "life", "count": 900 },        "domain": "computation", "tags": ["automata"] },
+  { "trigger": "elementary rule",    "triggerType": "phrase", "effect": { "automaton": "rule", "rule": 110 },         "domain": "computation", "tags": ["automata"] },
+  { "trigger": "rule 30",            "triggerType": "phrase", "effect": { "automaton": "rule", "rule": 30 },          "domain": "computation", "tags": ["automata"] },
+  { "trigger": "rule 90",            "triggerType": "phrase", "effect": { "automaton": "rule", "rule": 90 },          "domain": "computation", "tags": ["automata"] },
+  { "trigger": "rule 110",           "triggerType": "phrase", "effect": { "automaton": "rule", "rule": 110 },         "domain": "computation", "tags": ["automata"] },
+  { "trigger": "wolfram code",       "triggerType": "phrase", "effect": { "automaton": "rule", "rule": 45 },          "domain": "computation", "tags": ["automata"] },
+
+  /* Graphs & networks */
+  { "trigger": "graph",              "triggerType": "word",   "effect": { "graph": "generic", "count": 400 },         "domain": "computation", "tags": ["graph"] },
+  { "trigger": "tree",               "triggerType": "word",   "effect": { "graph": "tree", "branch": true, "branchRate": 0.28 }, "domain": "computation", "tags": ["graph"] },
+  { "trigger": "dag",                "triggerType": "word",   "effect": { "graph": "dag", "variation": 0.18 },        "domain": "computation", "tags": ["graph"] },
+  { "trigger": "scale-free",         "triggerType": "phrase", "effect": { "graph": "scaleFree", "count": 800 },       "domain": "computation", "tags": ["graph"] },
+  { "trigger": "small world",        "triggerType": "phrase", "effect": { "graph": "smallWorld", "count": 800 },      "domain": "computation", "tags": ["graph"] },
+  { "trigger": "network flow",       "triggerType": "phrase", "effect": { "flow": 0.6, "alignment": 0.4 },            "domain": "computation", "tags": ["graph"] },
+
+  /* Randomness & noise */
+  { "trigger": "white noise",        "triggerType": "phrase", "effect": { "tremor": 0.3, "variation": 0.3 },           "domain": "computation", "tags": ["noise"] },
+  { "trigger": "pink noise",         "triggerType": "phrase", "effect": { "tremor": 0.22, "variation": 0.22 },         "domain": "computation", "tags": ["noise"] },
+  { "trigger": "perlin noise",       "triggerType": "phrase", "effect": { "field": "perlin", "tide": 0.2 },            "domain": "computation", "tags": ["noise"] },
+  { "trigger": "simplex noise",      "triggerType": "phrase", "effect": { "field": "simplex", "tide": 0.22 },          "domain": "computation", "tags": ["noise"] },
+  { "trigger": "curl noise",         "triggerType": "phrase", "effect": { "field": "curl", "tide": 0.26 },             "domain": "computation", "tags": ["noise"] },
+
+  { "trigger": "pseudorandom",       "triggerType": "word",   "effect": { "rng": "mulberry32" },                      "domain": "computation", "tags": ["rng"] },
+  { "trigger": "deterministic",      "triggerType": "word",   "effect": { "deterministic": true },                     "domain": "computation", "tags": ["rng"] },
+  { "trigger": "seeded",             "triggerType": "word",   "effect": { "deterministic": true },                     "domain": "computation", "tags": ["rng"] },
+
+  /* Data structures / patterns */
+  { "trigger": "queue",              "triggerType": "word",   "effect": { "shape": "line", "count": 60 },             "domain": "computation", "tags": ["structure"] },
+  { "trigger": "stack",              "triggerType": "word",   "effect": { "shape": "line", "count": 120 },            "domain": "computation", "tags": ["structure"] },
+  { "trigger": "grid search",        "triggerType": "phrase", "effect": { "shape": "lattice", "count": 900 },         "domain": "computation", "tags": ["structure"] },
+  { "trigger": "heap",               "triggerType": "word",   "effect": { "shape": "triangle", "count": 200 },        "domain": "computation", "tags": ["structure"] },
+  { "trigger": "hash",               "triggerType": "word",   "effect": { "shape": "grid", "variation": 0.2 },        "domain": "computation", "tags": ["structure"] },
+
+  /* Optimization / fields */
+  { "trigger": "gradient descent",   "triggerType": "phrase", "effect": { "chemotaxis": 0.7, "chemoTarget": "minima" }, "domain": "computation", "tags": ["optim"] },
+  { "trigger": "simulated annealing","triggerType": "phrase", "effect": { "temperature": 0.8, "variation": 0.4 },      "domain": "computation", "tags": ["optim"] },
+  { "trigger": "genetic algorithm",  "triggerType": "phrase", "effect": { "divide": true, "variation": 0.6 },          "domain": "computation", "tags": ["optim"] },
+  { "trigger": "hill climb",         "triggerType": "phrase", "effect": { "chemotaxis": 0.5 },                         "domain": "computation", "tags": ["optim"] },
+
+  /* CA neighborhoods / kernels */
+  { "trigger": "moore neighborhood", "triggerType": "phrase", "effect": { "kernel": "moore" },                          "domain": "computation", "tags": ["kernel"] },
+  { "trigger": "von neumann",        "triggerType": "phrase", "effect": { "kernel": "vnn" },                            "domain": "computation", "tags": ["kernel"] },
+  { "trigger": "blur",               "triggerType": "word",   "effect": { "kernel": "blur", "grade": { "bloom": 0.1 } }, "domain": "computation", "tags": ["kernel"] },
+  { "trigger": "sharpen",            "triggerType": "word",   "effect": { "kernel": "sharpen", "grade": { "contrast": 0.06 } }, "domain": "computation", "tags": ["kernel"] },
+
+  /* State machines / timing */
+  { "trigger": "finite state",       "triggerType": "phrase", "effect": { "stateMachine": true, "snapToBeat": true }, "domain": "computation", "tags": ["state"] },
+  { "trigger": "oscillator",         "triggerType": "word",   "effect": { "oscillator": 1.0 },                        "domain": "computation", "tags": ["state"] },
+  { "trigger": "phase shift",        "triggerType": "phrase", "effect": { "phase": 0.5 },                              "domain": "computation", "tags": ["state"] },
+  { "trigger": "synchrony",          "triggerType": "word",   "effect": { "alignment": 0.7 },                          "domain": "computation", "tags": ["state"] },
+
+  /* Turing vibes / tapes */
+  { "trigger": "tape",               "triggerType": "word",   "effect": { "shape": "line", "count": 200, "timeScale": 0.9 }, "domain": "computation", "tags": ["turing"] },
+  { "trigger": "head",               "triggerType": "word",   "effect": { "count": 1, "glow": 0.2 },                       "domain": "computation", "tags": ["turing"] },
+  { "trigger": "alphabet",           "triggerType": "word",   "effect": { "variation": 0.2 },                              "domain": "computation", "tags": ["turing"] },
+
+  /* Signals & transforms */
+  { "trigger": "sine wave",          "triggerType": "phrase", "effect": { "shape": "wave", "waveHarmonics": 1 },       "domain": "computation", "tags": ["signal"] },
+  { "trigger": "square wave",        "triggerType": "phrase", "effect": { "shape": "wave", "waveHarmonics": 12 },      "domain": "computation", "tags": ["signal"] },
+  { "trigger": "sawtooth",           "triggerType": "word",   "effect": { "shape": "wave", "waveHarmonics": 6 },       "domain": "computation", "tags": ["signal"] },
+  { "trigger": "fourier",            "triggerType": "word",   "effect": { "montage": true, "beatMs": 250 },            "domain": "computation", "tags": ["signal"] },
+
+  /* Parallelism / swarm compute */
+  { "trigger": "map reduce",         "triggerType": "phrase", "effect": { "count": 1600, "alignment": 0.5 },           "domain": "computation", "tags": ["parallel"] },
+  { "trigger": "pipeline",           "triggerType": "word",   "effect": { "shape": "line", "count": 400 },             "domain": "computation", "tags": ["parallel"] },
+  { "trigger": "backpressure",       "triggerType": "word",   "effect": { "adhesion": 0.7 },                            "domain": "computation", "tags": ["parallel"] },
+
+  /* Errors / entropy */
+  { "trigger": "bit flip",           "triggerType": "phrase", "effect": { "variation": 0.4 },                           "domain": "computation", "tags": ["error"] },
+  { "trigger": "noise injection",    "triggerType": "phrase", "effect": { "tremor": 0.3 },                              "domain": "computation", "tags": ["error"] },
+  { "trigger": "checksum",           "triggerType": "word",   "effect": { "alignment": 0.3 },                           "domain": "computation", "tags": ["error"] },
+
+  /* Learning */
+  { "trigger": "gradient",           "triggerType": "word",   "effect": { "chemotaxis": 0.6 },                          "domain": "computation", "tags": ["learn"] },
+  { "trigger": "backprop",           "triggerType": "word",   "effect": { "chemotaxis": 0.7, "variation": 0.1 },        "domain": "computation", "tags": ["learn"] },
+  { "trigger": "attention",          "triggerType": "word",   "effect": { "alignment": 0.8 },                           "domain": "computation", "tags": ["learn"] },
+
+  /* Schedulers / clocks */
+  { "trigger": "clock",              "triggerType": "word",   "effect": { "oscillator": 1.0, "snapToBeat": true },      "domain": "computation", "tags": ["clock"] },
+  { "trigger": "tick",               "triggerType": "word",   "effect": { "oscillator": 2.0 },                           "domain": "computation", "tags": ["clock"] },
+  { "trigger": "heartbeat",          "triggerType": "word",   "effect": { "oscillator": 0.8, "glow": 0.12 },             "domain": "computation", "tags": ["clock"] }
+]
