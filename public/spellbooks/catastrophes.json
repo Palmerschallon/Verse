@@ -1,1 +1,222 @@
-
+[
+  {
+    "trigger": "godshatter",
+    "triggerType": "word",
+    "effect": {
+      "event": "rupture",
+      "fragmentPast": true,
+      "memoryEcho": true,
+      "replicate": true,
+      "die": true,
+      "divisionRate": 0.7,
+      "deathRate": 0.4,
+      "falseColor": true,
+      "variation": 0.8,
+      "recursion": 1.2
+    },
+    "domain": "meta",
+    "tags": ["apocalypse","fragment","memory"]
+  },
+  {
+    "trigger": "genesis pulse",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "birth",
+      "resetState": true,
+      "count": 1,
+      "explode": true,
+      "growthRate": 0.8,
+      "glow": 0.5
+    },
+    "domain": "meta",
+    "tags": ["origin","creation"]
+  },
+  {
+    "trigger": "big bang",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "birth",
+      "resetState": true,
+      "count": 1600,
+      "explosion": true,
+      "timeScale": 1.4,
+      "converge": false
+    },
+    "domain": "meta",
+    "tags": ["cosmogony","expansion"]
+  },
+  {
+    "trigger": "phase shift",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "phase",
+      "flipDynamics": true,
+      "orderToChaos": true,
+      "criticality": 1.0
+    },
+    "domain": "meta",
+    "tags": ["transition","critical"]
+  },
+  {
+    "trigger": "cascade failure",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "collapse",
+      "die": true,
+      "deathRate": 0.75,
+      "backpressure": 0.6,
+      "glitch": true
+    },
+    "domain": "meta",
+    "tags": ["failure","systemic"]
+  },
+  {
+    "trigger": "heat death",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "dissolution",
+      "fade": 1.0,
+      "timeScale": 0.2,
+      "count": 0,
+      "grain": 0.0
+    },
+    "domain": "meta",
+      "tags": ["end","thermo"]
+  },
+  {
+    "trigger": "big rip",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "expansion",
+      "repulsion": 1.0,
+      "adhesion": 0.0,
+      "stretchSpace": true,
+      "die": true,
+      "deathRate": 0.5
+    },
+    "domain": "meta",
+    "tags": ["end","cosmo"]
+  },
+  {
+    "trigger": "big crunch",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "collapse",
+      "converge": true,
+      "chemotaxis": 1.0,
+      "timeScale": 0.6,
+      "singularity": true
+    },
+    "domain": "meta",
+    "tags": ["end","cosmo"]
+  },
+  {
+    "trigger": "false vacuum decay",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "phase",
+      "nucleateBubbles": true,
+      "barrierBypass": true,
+      "timeScale": 1.2
+    },
+    "domain": "meta",
+    "tags": ["quantum","phase"]
+  },
+  {
+    "trigger": "critical point",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "phase",
+      "criticality": 1.0,
+      "longRangeCorrelation": true,
+      "variation": 0.6
+    },
+    "domain": "meta",
+    "tags": ["critical","transition"]
+  },
+  {
+    "trigger": "bifurcation",
+    "triggerType": "word",
+    "effect": {
+      "event": "branch",
+      "divide": true,
+      "branchRate": 0.5,
+      "symmetryBreak": true
+    },
+    "domain": "meta",
+    "tags": ["nonlinear","branch"]
+  },
+  {
+    "trigger": "percolation threshold",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "connectivity",
+      "suddenConnectivity": true,
+      "lattice": true,
+      "count": 900
+    },
+    "domain": "meta",
+    "tags": ["network","phase"]
+  },
+  {
+    "trigger": "time fracture",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "temporal",
+      "timeReverse": true,
+      "jumpCuts": true,
+      "phase": -0.5
+    },
+    "domain": "meta",
+    "tags": ["time","nonlinear"]
+  },
+  {
+    "trigger": "memory flood",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "recall",
+      "memoryEcho": true,
+      "afterimage": 0.7,
+      "trailBurnIn": 0.6
+    },
+    "domain": "meta",
+    "tags": ["memory","recall"]
+  },
+  {
+    "trigger": "blackout",
+    "triggerType": "word",
+    "effect": {
+      "event": "halt",
+      "alpha": 0.0,
+      "timeScale": 0.0,
+      "count": 0
+    },
+    "domain": "meta",
+    "tags": ["silence","halt"]
+  },
+  {
+    "trigger": "reboot",
+    "triggerType": "word",
+    "effect": {
+      "event": "reset",
+      "resetState": true,
+      "rngReseed": true,
+      "fadeIn": 0.6
+    },
+    "domain": "meta",
+    "tags": ["reset","init"]
+  },
+  {
+    "trigger": "apotheosis",
+    "triggerType": "word",
+    "effect": {
+      "event": "coalesce",
+      "cohere": true,
+      "converge": true,
+      "count": 1,
+      "glow": 0.9
+    },
+    "domain": "meta",
+    "tags": ["ascend","unify"]
+  }
+]
