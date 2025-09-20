@@ -1,0 +1,75 @@
+[
+  {
+    "trigger": "learn this",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "author": { "scope": "session", "book": "vernacular", "mode": "append" }
+    },
+    "domain": "self",
+    "tags": ["authoring"]
+  },
+  {
+    "trigger": "invent a form",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "synthesize": { "fromDomains": ["geometry","biology"], "intoBook": "geometry", "nameHint": "weave-spiral" }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "distill chaos",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "mine": { "source": "babel", "minConfidence": 0.72, "limit": 5, "intoBook": "core" }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "archive session",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "persist": { "where": "local", "books": ["vernacular","session"], "mergeMode": "soft" }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "forget",
+    "triggerType": "word",
+    "effect": {
+      "event": "self",
+      "prune": { "domains": ["vernacular","session"], "olderThanMs": 3600000 }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "show me what you learned",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "introspect": { "books": ["vernacular","session"], "limit": 20 }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "lock the canon",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "permissions": { "allowAuthoring": false, "allowMining": false }
+    },
+    "domain": "self"
+  },
+  {
+    "trigger": "unlock the canon",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "self",
+      "permissions": { "allowAuthoring": true, "allowMining": true }
+    },
+    "domain": "self"
+  }
+]
