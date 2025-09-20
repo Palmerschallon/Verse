@@ -1,0 +1,18 @@
+[
+  { "trigger": "silence",         "triggerType": "word",   "effect": { "timeScale": 0.0, "trails": 0.98 },                  "domain": "music", "tags": ["tempo"] },
+  { "trigger": "crescendo",       "triggerType": "word",   "effect": { "tide": 0.08, "grade": { "contrast": 0.06 } },       "domain": "music", "tags": ["dynamics","delta"] },
+  { "trigger": "decrescendo",     "triggerType": "word",   "effect": { "tide": -0.08, "grade": { "contrast": -0.04 } },     "domain": "music", "tags": ["dynamics","delta"] },
+  { "trigger": "staccato",        "triggerType": "word",   "effect": { "trails": 0.82, "tremor": 0.18 },                    "domain": "music", "tags": ["articulation"] },
+  { "trigger": "legato",          "triggerType": "word",   "effect": { "trails": 0.97, "tremor": 0.06 },                    "domain": "music", "tags": ["articulation"] },
+  { "trigger": "fugue",           "triggerType": "word",   "effect": { "montage": true, "beatMs": 420 },                    "domain": "music", "tags": ["structure"] },
+  { "trigger": "ostinato",        "triggerType": "word",   "effect": { "oscillator": 1.2, "snapToBeat": true },             "domain": "music", "tags": ["pattern"] },
+  { "trigger": "syncopation",     "triggerType": "word",   "effect": { "snapToBeat": false, "variation": 0.25 },            "domain": "music", "tags": ["rhythm"] },
+  { "trigger": "drone",           "triggerType": "word",   "effect": { "timeScale": 0.6, "tremor": 0.04 },                  "domain": "music", "tags": ["texture"] },
+  { "trigger": "polyphony",       "triggerType": "word",   "effect": { "count": 1200, "alignment": 0.35 },                  "domain": "music", "tags": ["layering"] },
+  { "trigger": "monophony",       "triggerType": "word",   "effect": { "count": 1, "tremor": 0.08 },                        "domain": "music", "tags": ["layering"] },
+  { "trigger": "forte",           "triggerType": "word",   "effect": { "tremor": 0.28, "tide": 0.34 },                      "domain": "music", "tags": ["dynamics"] },
+  { "trigger": "piano",           "triggerType": "word",   "effect": { "tremor": 0.06, "tide": 0.12 },                      "domain": "music", "tags": ["dynamics"] },
+  { "trigger": "<bpm>",           "triggerType": "pattern","effect": { "bpm": "<int>" },                                    "domain": "music", "tags": ["tempo"] },
+  { "trigger": "on the beat",     "triggerType": "phrase", "effect": { "snapToBeat": true },                                "domain": "music", "tags": ["rhythm"] },
+  { "trigger": "off the beat",    "triggerType": "phrase", "effect": { "snapToBeat": false },                               "domain": "music", "tags": ["rhythm"] }
+]
