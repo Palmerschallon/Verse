@@ -36,7 +36,7 @@
     <button class="btn" id="apply">Apply</button>
     <button class="btn ghost" id="close">Close</button>
   </div>
-</div>
+</div>  
 
 <script type="module">
   import { loadBooks, resolve } from './js/resolver.js';
@@ -90,6 +90,11 @@
 
   // first frame
   engine.kick();
-</script>
+
+
+  <!-- Scripts at the bottom so DOM is ready before execution -->
+  <script src="./js/resolver.js"></script>
+  <script src="./js/spellbook-resolver.js"></script>
+  <script src="./js/engine.js"></script>
 </body>
 </html>
