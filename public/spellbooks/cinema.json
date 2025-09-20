@@ -1,0 +1,75 @@
+[
+  /* ─────────────── Transitions ─────────────── */
+  { "trigger": "fade in",        "triggerType": "phrase",  "effect": { "transition": "fadeIn",  "duration": 1200 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "fade out",       "triggerType": "phrase",  "effect": { "transition": "fadeOut", "duration": 1200 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "dissolve",       "triggerType": "word",    "effect": { "transition": "dissolve","duration": 1400 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "crossfade",      "triggerType": "word",    "effect": { "transition": "crossfade","duration": 1200 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "cut",            "triggerType": "word",    "effect": { "transition": "cut", "duration": 0 },       "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "smash cut",      "triggerType": "phrase",  "effect": { "transition": "cut", "duration": 0, "impact": 1.0 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "match cut",      "triggerType": "phrase",  "effect": { "transition": "matchCut", "duration": 300 }, "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "iris in",        "triggerType": "phrase",  "effect": { "transition": "irisIn", "duration": 1000 },  "domain": "cinema", "tags": ["transition"] },
+  { "trigger": "iris out",       "triggerType": "phrase",  "effect": { "transition": "irisOut","duration": 1000 },  "domain": "cinema", "tags": ["transition"] },
+
+  /* ─────────────── Time & Tempo ─────────────── */
+  { "trigger": "slow motion",    "triggerType": "phrase",  "effect": { "timeScale": 0.35 },     "domain": "cinema", "tags": ["tempo"] },
+  { "trigger": "time-lapse",     "triggerType": "phrase",  "effect": { "timeScale": 2.0 },      "domain": "cinema", "tags": ["tempo"] },
+  { "trigger": "freeze frame",   "triggerType": "phrase",  "effect": { "timeScale": 0.0 },      "domain": "cinema", "tags": ["tempo"] },
+  { "trigger": "montage",        "triggerType": "word",    "effect": { "montage": true, "beatMs": 600 }, "domain": "cinema", "tags": ["structure"] },
+  { "trigger": "hold",           "triggerType": "word",    "effect": { "holdMs": 800 },         "domain": "cinema", "tags": ["tempo"] },
+
+  /* Patterns for timing */
+  { "trigger": "<seconds>",      "triggerType": "pattern", "effect": { "sectionSeconds": "<float>" }, "domain": "cinema", "tags": ["tempo"], "notes": "e.g., '10s' or '2.5 seconds' → float seconds" },
+  { "trigger": "<bpm>",          "triggerType": "pattern", "effect": { "bpm": "<int>" },         "domain": "cinema", "tags": ["tempo"], "notes": "e.g., '90 bpm' sets beat grid" },
+
+  /* ─────────────── Camera: Move ─────────────── */
+  { "trigger": "push in",        "triggerType": "phrase",  "effect": { "camera": { "zoom": +0.6 } },                   "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "pull back",      "triggerType": "phrase",  "effect": { "camera": { "zoom": -0.6 } },                   "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "dolly in",       "triggerType": "phrase",  "effect": { "camera": { "zoom": +0.4, "ease": "inOut" } },  "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "dolly out",      "triggerType": "phrase",  "effect": { "camera": { "zoom": -0.4, "ease": "inOut" } },  "domain": "cinema", "tags": ["camera","move"] },
+
+  { "trigger": "pan left",       "triggerType": "phrase",  "effect": { "camera": { "panX": -1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "pan right",      "triggerType": "phrase",  "effect": { "camera": { "panX": +1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "tilt up",        "triggerType": "phrase",  "effect": { "camera": { "panY": -1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "tilt down",      "triggerType": "phrase",  "effect": { "camera": { "panY": +1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+
+  { "trigger": "track left",     "triggerType": "phrase",  "effect": { "camera": { "trackX": -1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+  { "trigger": "track right",    "triggerType": "phrase",  "effect": { "camera": { "trackX": +1.0 } }, "domain": "cinema", "tags": ["camera","move"] },
+
+  { "trigger": "handheld",       "triggerType": "word",    "effect": { "camera": { "shake": 0.6 } },  "domain": "cinema", "tags": ["camera","feel"] },
+  { "trigger": "lock off",       "triggerType": "phrase",  "effect": { "camera": { "locked": true } }, "domain": "cinema", "tags": ["camera","feel"] },
+
+  /* Rotation */
+  { "trigger": "roll",           "triggerType": "word",    "effect": { "camera": { "rollDeg": 10 } }, "domain": "cinema", "tags": ["camera","rotate"] },
+  { "trigger": "<deg>",          "triggerType": "pattern", "effect": { "camera": { "rollDeg": "<int>" } }, "domain": "cinema", "tags": ["camera","rotate"], "notes": "e.g., '15°' or 'roll 15 deg' if parser pairs tokens" },
+
+  /* ─────────────── Camera: Framing ─────────────── */
+  { "trigger": "close-up",       "triggerType": "phrase",  "effect": { "framing": "CU",  "camera": { "zoom": +0.8 } },  "domain": "cinema", "tags": ["framing"] },
+  { "trigger": "extreme close-up","triggerType": "phrase", "effect": { "framing": "ECU","camera": { "zoom": +1.2 } },  "domain": "cinema", "tags": ["framing"] },
+  { "trigger": "medium shot",    "triggerType": "phrase",  "effect": { "framing": "MS",  "camera": { "zoom": 0.0 } },   "domain": "cinema", "tags": ["framing"] },
+  { "trigger": "wide shot",      "triggerType": "phrase",  "effect": { "framing": "WS",  "camera": { "zoom": -0.6 } },  "domain": "cinema", "tags": ["framing"] },
+  { "trigger": "establishing",   "triggerType": "word",    "effect": { "framing": "EST","camera": { "zoom": -0.9 } },   "domain": "cinema", "tags": ["framing"] },
+
+  /* Aspect & Masking (forward compatible) */
+  { "trigger": "square frame",   "triggerType": "phrase",  "effect": { "aspect": "1:1" },             "domain": "cinema", "tags": ["frame"] },
+  { "trigger": "portrait frame", "triggerType": "phrase",  "effect": { "aspect": "9:16" },            "domain": "cinema", "tags": ["frame"] },
+  { "trigger": "landscape frame","triggerType": "phrase",  "effect": { "aspect": "16:9" },            "domain": "cinema", "tags": ["frame"] },
+  { "trigger": "letterbox",      "triggerType": "word",    "effect": { "mask": "letterbox" },         "domain": "cinema", "tags": ["frame"] },
+  { "trigger": "vignette",       "triggerType": "word",    "effect": { "grade": { "vignette": 0.4 } }, "domain": "cinema", "tags": ["grade"] },
+
+  /* ─────────────── Editorial cues ─────────────── */
+  { "trigger": "beat",           "triggerType": "word",    "effect": { "beatMs": 500 },               "domain": "cinema", "tags": ["structure"] },
+  { "trigger": "on the beat",    "triggerType": "phrase",  "effect": { "snapToBeat": true },          "domain": "cinema", "tags": ["structure"] },
+  { "trigger": "off the beat",   "triggerType": "phrase",  "effect": { "snapToBeat": false },         "domain": "cinema", "tags": ["structure"] },
+
+  /* ─────────────── Exposure / Grade (subtle defaults) ─────────────── */
+  { "trigger": "high contrast",  "triggerType": "phrase",  "effect": { "grade": { "contrast": 0.2 } }, "domain": "cinema", "tags": ["grade"] },
+  { "trigger": "low contrast",   "triggerType": "phrase",  "effect": { "grade": { "contrast": -0.1 } }, "domain": "cinema", "tags": ["grade"] },
+  { "trigger": "soft bloom",     "triggerType": "phrase",  "effect": { "grade": { "bloom": 0.25 } },   "domain": "cinema", "tags": ["grade"] },
+  { "trigger": "no grain",       "triggerType": "phrase",  "effect": { "grade": { "grain": 0.0 } },    "domain": "cinema", "tags": ["grade"] },
+  { "trigger": "film grain",     "triggerType": "phrase",  "effect": { "grade": { "grain": 0.25 } },   "domain": "cinema", "tags": ["grade"] },
+
+  /* ─────────────── Directional cues (aliases) ─────────────── */
+  { "trigger": "left",           "triggerType": "alias",   "effect": { "dir": -1 },                    "domain": "cinema", "tags": ["dir","alias"] },
+  { "trigger": "right",          "triggerType": "alias",   "effect": { "dir":  1 },                    "domain": "cinema", "tags": ["dir","alias"] },
+  { "trigger": "<direction>",    "triggerType": "pattern", "effect": { "dir": "<-1|1>" },              "domain": "cinema", "tags": ["dir"], "notes": "Map 'left/right' to -1/+1" }
+]
