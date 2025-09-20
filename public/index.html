@@ -1,42 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Verse • Core Demo</title>
-<style>
-  html,body{margin:0;height:100%;background:#000;color:#fff;font:16px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto}
-  canvas{position:fixed;inset:0;display:block;background:#000}
-  /* paste overlay */
-  .sheet{position:fixed;left:0;right:0;bottom:0;transform:translateY(100%);
-    background:rgba(12,12,14,.78);backdrop-filter:blur(10px) saturate(1.1);
-    border-top:1px solid rgba(255,255,255,.12);padding:14px 14px calc(14px + env(safe-area-inset-bottom,0));
-    transition:transform .18s ease;z-index:10}
-  .sheet.open{transform:translateY(0)}
-  textarea{width:100%;min-height:120px;max-height:38vh;border:1px solid rgba(255,255,255,.18);background:#0b0c0f;color:#fff;
-    border-radius:12px;padding:12px 12px 16px;font:16px ui-monospace,Menlo,Consolas,monospace;outline:none;resize:none}
-  .row{display:flex;gap:10px;margin-top:10px}
-  .btn{flex:0 0 auto;border:1px solid rgba(255,255,255,.2);background:#fff;color:#000;border-radius:999px;padding:8px 14px;font-weight:600}
-  .btn.ghost{background:transparent;color:#fff}
-  .hint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);color:#9aa3ad;font:14px/1.4 ui-sans-serif;letter-spacing:.2px;opacity:.8;text-align:center;user-select:none}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verse Lab</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    html, body { margin:0; height:100%; background:#000; color:#fff; font:16px -apple-system,system-ui,ui-monospace }
+    canvas { position:fixed; inset:0; display:block; background:#000 }
+    .sheet{position:fixed;left:0;right:0;bottom:0;transform:translateY(100%);
+      background:rgba(12,12,14,.78);backdrop-filter:saturate(1.2) blur(10px);
+      border-top:1px solid rgba(255,255,255,.12);padding:14px;
+      transition:transform .2s ease;z-index:10}
+    .sheet.open{transform:translateY(0)}
+    textarea{width:100%;min-height:120px;max-height:40vh;
+      border:1px solid rgba(255,255,255,.2);background:#0b0c0f;color:#fff;
+      border-radius:12px;padding:12px;font:16px ui-monospace,monospace;
+      outline:none;resize:none}
+    .row{display:flex;gap:10px;margin-top:10px}
+    .btn{flex:0 0 auto;border:1px solid rgba(255,255,255,.2);background:#fff;color:#000;
+      border-radius:999px;padding:8px 14px;font-weight:600}
+    .btn.ghost{background:transparent;color:#fff}
+  </style>
 </head>
 <body>
-<canvas id="stage"></canvas>
+  <canvas id="stage"></canvas>
 
-<div id="hint" class="hint">
-  tap to paste a seed<br/>
-  <span style="opacity:.7">Words map via spellbooks. Ring, spiral, lattice; calm, tide, trails; catastrophes if invoked.</span>
-</div>
-
-<!-- Paste-only overlay -->
-<div class="sheet" id="sheet">
-  <textarea id="seedBox" maxlength="4000" spellcheck="false" placeholder="Paste any text (poem, paragraph, file snippet)…"></textarea>
-  <div class="row">
-    <button class="btn" id="apply">Apply</button>
-    <button class="btn ghost" id="close">Close</button>
+  <!-- Paste overlay -->
+  <div class="sheet" id="sheet">
+    <textarea id="seedBox" maxlength="280" spellcheck="false"
+              placeholder="Paste (≤280 chars) and Apply…"></textarea>
+    <div class="row">
+      <button class="btn" id="apply">Apply</button>
+      <button class="btn ghost" id="close">Close</button>
+    </div>
   </div>
-</div>  
+
+  <!-- Scripts: load in order -->
+  <script src="./js/resolver.js"></script>
+  <script src="./js/spellbook-resolver.js"></script>
+  <script src="./js/engine.js"></script>
+</body>
+</html>
 
 <script type="module">
   import { loadBooks, resolve } from './js/resolver.js';
@@ -92,9 +97,6 @@
   engine.kick();
 
 
-  <!-- Scripts at the bottom so DOM is ready before execution -->
-  <script src="./js/resolver.js"></script>
-  <script src="./js/spellbook-resolver.js"></script>
-  <script src="./js/engine.js"></script>
+<script>
 </body>
 </html>
