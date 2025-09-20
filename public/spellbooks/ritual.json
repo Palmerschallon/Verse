@@ -1,0 +1,17 @@
+[
+  { "trigger": "threshold",     "triggerType": "word",   "effect": { "transition": "fadeIn", "duration": 800 },             "domain": "ritual", "tags": ["portal"] },
+  { "trigger": "mirror",        "triggerType": "word",   "effect": { "camera": { "rollDeg": 180 } },                        "domain": "ritual", "tags": ["symmetry"] },
+  { "trigger": "candle",        "triggerType": "word",   "effect": { "count": 1, "glow": 0.4, "trails": 0.98 },             "domain": "ritual", "tags": ["light"] },
+  { "trigger": "incantation",   "triggerType": "word",   "effect": { "montage": true, "beatMs": 700 },                      "domain": "ritual", "tags": ["structure"] },
+  { "trigger": "circle cast",   "triggerType": "phrase", "effect": { "shape": "ring", "tremor": 0.1 },                      "domain": "ritual", "tags": ["shape"] },
+  { "trigger": "banish",        "triggerType": "word",   "effect": { "trails": 0.85, "transition": "fadeOut", "duration": 700 }, "domain": "ritual", "tags": ["exit"] },
+  { "trigger": "summon",        "triggerType": "word",   "effect": { "count": 400, "tremor": 0.2 },                         "domain": "ritual", "tags": ["entry"] },
+  { "trigger": "binding",       "triggerType": "word",   "effect": { "adhesion": 0.8, "alignment": 0.4 },                   "domain": "ritual", "tags": ["cohesion"] },
+  { "trigger": "ward",          "triggerType": "word",   "effect": { "boundary": "hard", "boundaryRadius": 0.44 },         "domain": "ritual", "tags": ["protection"] },
+  { "trigger": "sigil",         "triggerType": "word",   "effect": { "shape": "lattice", "variation": 0.2 },                "domain": "ritual", "tags": ["mark"] },
+  { "trigger": "consecrate",    "triggerType": "word",   "effect": { "grade": { "contrast": 0.08 }, "trails": 0.96 },       "domain": "ritual", "tags": ["grade"] },
+  { "trigger": "veil",          "triggerType": "word",   "effect": { "mask": "letterbox", "grade": { "contrast": -0.06 } }, "domain": "ritual", "tags": ["mask"] },
+  { "trigger": "pilgrimage",    "triggerType": "word",   "effect": { "camera": { "trackX": 1.0 }, "timeScale": 0.9 },       "domain": "ritual", "tags": ["journey"] },
+  { "trigger": "relic",         "triggerType": "word",   "effect": { "count": 1, "trails": 0.99 },                          "domain": "ritual", "tags": ["artifact"] },
+  { "trigger": "conjunction",   "triggerType": "word",   "effect": { "alignment": 0.7, "shape": "ring" },                   "domain": "ritual", "tags": ["alignment"] }
+]
