@@ -1,0 +1,57 @@
+[
+  {
+    "trigger": "ritual mask",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "route": { "from": "*", "to": "ritual" }
+    },
+    "domain": "masks",
+    "tags": ["redirect"]
+  },
+  {
+    "trigger": "dream mask",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "route": { "from": "*", "to": "consciousness" }
+    },
+    "domain": "masks"
+  },
+  {
+    "trigger": "storm mask",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "route": { "from": "cinema.lighting", "to": "weather.storm" }
+    },
+    "domain": "masks"
+  },
+  {
+    "trigger": "geometry to biology",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "map": [{ "if": "shape:ring", "then": "cell:membrane" }, { "if": "shape:spiral", "then": "morph:branching" }]
+    },
+    "domain": "masks"
+  },
+  {
+    "trigger": "silhouette mask",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "stencil": "silhouette"
+    },
+    "domain": "masks"
+  },
+  {
+    "trigger": "kaleido mask",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "mask",
+      "kaleido": 6
+    },
+    "domain": "masks"
+  }
+]
