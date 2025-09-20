@@ -1,0 +1,12 @@
+[
+  { "trigger": "arch",       "triggerType": "word",   "effect": { "shape": "arc", "tide": 0.08 },            "domain": "architecture", "tags": ["form"] },
+  { "trigger": "vault",      "triggerType": "word",   "effect": { "shape": "arc", "trails": 0.96 },          "domain": "architecture", "tags": ["form"] },
+  { "trigger": "cathedral",  "triggerType": "word",   "effect": { "shape": "lattice", "grade": { "contrast": 0.1 } }, "domain": "architecture", "tags": ["scale"] },
+  { "trigger": "labyrinth",  "triggerType": "word",   "effect": { "maze": true, "count": 600 },              "domain": "architecture", "tags": ["maze"] },
+  { "trigger": "column",     "triggerType": "word",   "effect": { "shape": "line", "count": 12 },            "domain": "architecture", "tags": ["structure"] },
+  { "trigger": "pillar",     "triggerType": "alias",  "effect": { "shape": "line", "count": 12 },            "domain": "architecture", "tags": ["structure"] },
+  { "trigger": "scaffold",   "triggerType": "word",   "effect": { "shape": "grid", "variation": 0.2 },       "domain": "architecture", "tags": ["support"] },
+  { "trigger": "tower",      "triggerType": "word",   "effect": { "shape": "line", "tremor": 0.12 },         "domain": "architecture", "tags": ["vertical"] },
+  { "trigger": "bridge",     "triggerType": "word",   "effect": { "shape": "line", "span": true },           "domain": "architecture", "tags": ["span"] },
+  { "trigger": "dome",       "triggerType": "word",   "effect": { "shape": "ellipse", "trails": 0.98 },      "domain": "architecture", "tags": ["curved"] }
+]
