@@ -1,0 +1,12 @@
+[
+  { "trigger": "brain fog",    "triggerType": "phrase", "effect": { "tremor": 0.28, "trails": 0.85 },         "domain": "vernacular", "tags": ["cognitive"] },
+  { "trigger": "flow state",   "triggerType": "phrase", "effect": { "tide": 0.3, "trails": 0.97 },            "domain": "vernacular", "tags": ["focus"] },
+  { "trigger": "spiral of thought", "triggerType": "phrase", "effect": { "shape": "spiral", "tremor": 0.22 }, "domain": "vernacular", "tags": ["mental"] },
+  { "trigger": "butterflies",  "triggerType": "word",   "effect": { "count": 20, "tremor": 0.34 },            "domain": "vernacular", "tags": ["anxiety"] },
+  { "trigger": "lost in the weeds", "triggerType": "phrase", "effect": { "shape": "lattice", "count": 800 },  "domain": "vernacular", "tags": ["overwhelm"] },
+  { "trigger": "aha moment",   "triggerType": "phrase", "effect": { "glow": 0.8, "trails": 0.99 },            "domain": "vernacular", "tags": ["insight"] },
+  { "trigger": "rabbit hole",  "triggerType": "phrase", "effect": { "maze": true, "depth": 0.6 },             "domain": "vernacular", "tags": ["explore"] },
+  { "trigger": "echo chamber", "triggerType": "phrase", "effect": { "alignment": 0.7, "trails": 0.95 },       "domain": "vernacular", "tags": ["feedback"] },
+  { "trigger": "daydream",     "triggerType": "word",   "effect": { "timeScale": 0.7, "variation": 0.2 },     "domain": "vernacular", "tags": ["imagination"] },
+  { "trigger": "storm in a teacup", "triggerType": "phrase", "effect": { "count": 40, "tremor": 0.26 },       "domain": "vernacular", "tags": ["drama"] }
+]
