@@ -1,0 +1,93 @@
+[
+  {
+    "trigger": "lexicon precedence",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "precedence": ["catastrophes", "impossible", "consciousness", "core", "artists", "biology", "weather", "geometry", "fog", "babel"] }
+    },
+    "domain": "laws",
+    "tags": ["order"]
+  },
+  {
+    "trigger": "soft merge",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "merge": { "mode": "soft", "weight": 0.5 } }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "hard merge",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "merge": { "mode": "hard", "weight": 1.0 } }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "conflict favors geometry",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "conflict": { "winnerDomain": "geometry" } }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "when spiral meets lattice weave them",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "combo": [{ "if": ["shape:spiral","shape:lattice"], "then": { "shape": "weave", "alignment": 0.7 } }] }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "limit counts",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "guards": { "maxCount": 4000, "clampNumbers": true } }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "prefer determinism",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "rng": { "deterministic": true, "seedFrom": "poemHash" } }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "mute catastrophes",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "disableDomains": ["catastrophes"] }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "enable catastrophes",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "enableDomains": ["catastrophes"] }
+    },
+    "domain": "laws"
+  },
+  {
+    "trigger": "weight poetry over prose",
+    "triggerType": "phrase",
+    "effect": {
+      "event": "law",
+      "laws": { "tokenWeights": { "lineBreak": 1.2, "rhyme": 1.1, "stopwords": 0.5 } }
+    },
+    "domain": "laws"
+  }
+]
