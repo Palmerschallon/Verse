@@ -1,0 +1,39 @@
+[
+  {
+    "trigger": "silence",
+    "triggerType": "word",
+    "effect": { "event": "silence", "mute": "all" },
+    "domain": "silence",
+    "tags": ["void"]
+  },
+  {
+    "trigger": "hush",
+    "triggerType": "word",
+    "effect": { "event": "silence", "attenuate": 0.6 },
+    "domain": "silence"
+  },
+  {
+    "trigger": "pause",
+    "triggerType": "word",
+    "effect": { "event": "silence", "timeScale": 0.0, "holdMs": 600 },
+    "domain": "silence"
+  },
+  {
+    "trigger": "breath",
+    "triggerType": "word",
+    "effect": { "event": "silence", "timeScale": 0.7, "trails": 0.99 },
+    "domain": "silence"
+  },
+  {
+    "trigger": "black frame",
+    "triggerType": "phrase",
+    "effect": { "event": "silence", "alpha": 0.0, "durationMs": 250 },
+    "domain": "silence"
+  },
+  {
+    "trigger": "reset the room",
+    "triggerType": "phrase",
+    "effect": { "event": "silence", "clearCanvas": true },
+    "domain": "silence"
+  }
+]
