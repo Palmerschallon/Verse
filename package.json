@@ -1,0 +1,11 @@
+{
+  "name": "verse",
+  "version": "0.1.0",
+  "description": "Verse creative coding prototype",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

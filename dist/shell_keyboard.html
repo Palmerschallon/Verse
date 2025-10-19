@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verse Shell · Keyboard Prototype</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #05060a;
+        --panel: #10121a;
+        --panel-accent: #161924;
+        --border: rgba(255, 255, 255, 0.08);
+        --text: #edf1ff;
+        --muted: rgba(237, 241, 255, 0.6);
+        --highlight: rgba(102, 153, 255, 0.18);
+        --pill-bg: rgba(255, 255, 255, 0.1);
+        font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at 20% 20%, #0f1330, #05060a 62%);
+        color: var(--text);
+        display: flex;
+        justify-content: center;
+      }
+
+      .app-shell {
+        width: min(100%, 1024px);
+        display: grid;
+        grid-template-rows: auto 1fr;
+        background: rgba(8, 10, 18, 0.72);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 28px;
+        margin: 24px;
+        overflow: hidden;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(15, 16, 24, 0.86);
+      }
+
+      header h1 {
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .drawer-toggle {
+        height: 36px;
+        width: 36px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+
+      .drawer-toggle:active {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .mode-buttons {
+        margin-left: auto;
+        display: inline-flex;
+        padding: 4px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        gap: 4px;
+      }
+
+      .mode-buttons button {
+        border: 0;
+        border-radius: 12px;
+        padding: 6px 16px;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .mode-buttons button.is-active {
+        color: var(--text);
+        background: rgba(102, 153, 255, 0.22);
+      }
+
+      .app-body {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 640px;
+      }
+
+      .drawer {
+        background: rgba(9, 11, 18, 0.82);
+        border-right: 1px solid var(--border);
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .drawer h2 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .drawer p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
+        color: rgba(237, 241, 255, 0.7);
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-rows: minmax(200px, 1fr) auto auto auto;
+        background: linear-gradient(180deg, rgba(12, 15, 26, 0.88), rgba(6, 7, 12, 0.96));
+        padding: 24px;
+        gap: 18px;
+      }
+
+      .editor-stage {
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: rgba(18, 20, 32, 0.7);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .editor-title {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .editor-display {
+        min-height: 120px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(6, 8, 16, 0.65);
+        padding: 16px;
+        font-size: 18px;
+        line-height: 1.5;
+        letter-spacing: 0.01em;
+        position: relative;
+        overflow-wrap: break-word;
+      }
+
+      .editor-display::after {
+        content: "tap ◆ keyboard";
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        font-size: 12px;
+        color: rgba(237, 241, 255, 0.38);
+      }
+
+      .editor-caret {
+        display: inline-block;
+        width: 2px;
+        background: rgba(102, 153, 255, 0.9);
+        animation: caret 1s step-start infinite;
+      }
+
+      @keyframes caret {
+        0%, 50% {
+          opacity: 1;
+        }
+        50.01%, 100% {
+          opacity: 0;
+        }
+      }
+
+      .suggestion-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: center;
+      }
+
+      .suggestion-strip button {
+        height: 40px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: var(--pill-bg);
+        color: var(--text);
+        font-size: 14px;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+      }
+
+      .suggestion-strip button.is-hidden {
+        visibility: hidden;
+      }
+
+      .keyboard-wrapper {
+        border-radius: 26px;
+        background: rgba(8, 9, 14, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 12px 10px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .keyboard-row {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 6px;
+        justify-content: center;
+        position: relative;
+      }
+
+      .keyboard-row[data-row="1"] {
+        height: 48px;
+        grid-template-columns: repeat(10, minmax(0, 1fr)) 1.2fr;
+      }
+
+      .keyboard-row[data-row="2"] {
+        height: 48px;
+        grid-template-columns: 0.5fr repeat(9, minmax(0, 1fr)) 1.2fr;
+      }
+
+      .keyboard-row[data-row="3"] {
+        height: 48px;
+        grid-template-columns: 1.2fr repeat(7, minmax(0, 1fr)) 1.2fr;
+      }
+
+      .keyboard-row[data-row="4"] {
+        height: 56px;
+        grid-template-columns: 1.3fr 1fr 4fr 1.3fr;
+      }
+
+      .vk-key {
+        border: 0;
+        border-radius: 12px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        color: var(--text);
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: none;
+      }
+
+      .vk-key[data-role="wide"] {
+        border-radius: 14px;
+        font-size: 16px;
+      }
+
+      .vk-key.is-pressed {
+        transform: translateY(1px);
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .vk-key.is-hover {
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      }
+
+      .vk-popover {
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        background: rgba(12, 14, 22, 0.95);
+        border-radius: 14px;
+        padding: 8px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .vk-popover-key {
+        min-width: 36px;
+        border-radius: 10px;
+        border: 0;
+        background: rgba(255, 255, 255, 0.12);
+        color: var(--text);
+        font-size: 16px;
+        padding: 8px 10px;
+      }
+
+      .compile-log {
+        border-radius: 16px;
+        background: rgba(6, 8, 14, 0.86);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 16px;
+        font-family: "SF Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        line-height: 1.4;
+        color: rgba(237, 241, 255, 0.8);
+        white-space: pre-wrap;
+        min-height: 120px;
+      }
+
+      @media (max-width: 960px) {
+        .app-body {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .drawer {
+          display: none;
+        }
+
+        .drawer.is-open {
+          display: flex;
+        }
+      }
+    </style>
+    <script type="module" src="./ui/shell.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <button class="drawer-toggle" data-shell-drawer-toggle aria-label="Toggle drawer">☰</button>
+        <h1>Verse · Seed / Bloom</h1>
+        <div class="mode-buttons">
+          <button type="button" class="is-active" data-mode="seed">Seed</button>
+          <button type="button" data-mode="bloom">Bloom</button>
+        </div>
+      </header>
+      <div class="app-body">
+        <aside class="drawer" data-shell-drawer>
+          <h2>Spellbook</h2>
+          <p>
+            Drop seeds under 280 characters. Seed mode compiles literal triggers; Bloom explores harmonics
+            while staying deterministic once compiled.
+          </p>
+        </aside>
+        <main class="workspace">
+          <section class="editor-stage">
+            <span class="editor-title">Seed Draft</span>
+            <div class="editor-display" data-editor-display></div>
+          </section>
+          <section class="suggestion-strip" data-suggestion-strip>
+            <button type="button" data-suggestion></button>
+            <button type="button" data-suggestion></button>
+            <button type="button" data-suggestion></button>
+          </section>
+          <section class="keyboard-wrapper" data-keyboard>
+            <div class="keyboard-row" data-row="1">
+              <button class="vk-key" type="button" data-key="q">Q</button>
+              <button class="vk-key" type="button" data-key="w">W</button>
+              <button class="vk-key" type="button" data-key="e" data-alternates="é|ê|ë">E</button>
+              <button class="vk-key" type="button" data-key="r">R</button>
+              <button class="vk-key" type="button" data-key="t">T</button>
+              <button class="vk-key" type="button" data-key="y">Y</button>
+              <button class="vk-key" type="button" data-key="u" data-alternates="ù|û">U</button>
+              <button class="vk-key" type="button" data-key="i" data-alternates="î|ï">I</button>
+              <button class="vk-key" type="button" data-key="o" data-alternates="ô|ö">O</button>
+              <button class="vk-key" type="button" data-key="p">P</button>
+              <button class="vk-key" type="button" data-action="backspace" data-role="wide">⌫</button>
+            </div>
+            <div class="keyboard-row" data-row="2">
+              <span></span>
+              <button class="vk-key" type="button" data-key="a" data-alternates="à|á|â|ä">A</button>
+              <button class="vk-key" type="button" data-key="s">S</button>
+              <button class="vk-key" type="button" data-key="d">D</button>
+              <button class="vk-key" type="button" data-key="f">F</button>
+              <button class="vk-key" type="button" data-key="g">G</button>
+              <button class="vk-key" type="button" data-key="h">H</button>
+              <button class="vk-key" type="button" data-key="j">J</button>
+              <button class="vk-key" type="button" data-key="k">K</button>
+              <button class="vk-key" type="button" data-key="l">L</button>
+              <button class="vk-key" type="button" data-action="delete" data-role="wide">⌦</button>
+            </div>
+            <div class="keyboard-row" data-row="3">
+              <button class="vk-key" type="button" data-action="move-left" data-role="wide">⇤</button>
+              <button class="vk-key" type="button" data-key="z">Z</button>
+              <button class="vk-key" type="button" data-key="x">X</button>
+              <button class="vk-key" type="button" data-key="c">C</button>
+              <button class="vk-key" type="button" data-key="v">V</button>
+              <button class="vk-key" type="button" data-key="b">B</button>
+              <button class="vk-key" type="button" data-key="n">N</button>
+              <button class="vk-key" type="button" data-key="m">M</button>
+              <button class="vk-key" type="button" data-action="move-right" data-role="wide">⇥</button>
+            </div>
+            <div class="keyboard-row" data-row="4">
+              <button class="vk-key" type="button" data-role="wide" data-key="123">123</button>
+              <button class="vk-key" type="button" data-role="wide" data-key="◆">◆</button>
+              <button class="vk-key" type="button" data-action="space" data-role="wide">Space</button>
+              <button class="vk-key" type="button" data-action="return" data-role="wide">Return</button>
+            </div>
+          </section>
+          <section class="compile-log" data-compile-log>{}</section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
